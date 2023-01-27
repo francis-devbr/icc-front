@@ -3,6 +3,8 @@ import Index from "./views/Index";
 import Liberacao from "./views/Liberacao";
 import TodasOcorrencias from "./views/TodasOcorrencias";
 import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
+import TodasLojas from "./views/TodasLojas";
+import EditLoja from "./views/EditLoja";
 import MNPEX from "./views/MNPEX";
 import NotaFiscal from "./views/NotaFiscal";
 import Relatorios from "./views/Relatorios";
@@ -28,6 +30,20 @@ var routes = [
     name: "Editar Cadastro de Ocorrência",
     icon: "ni ni-folder-17 text-primary",
     element: <EditCadastroOcorrencia />,
+    layout: "/admin",
+  },
+  {
+    path: "/todas-lojas",
+    name: "Todas as Lojas",
+    icon: "fa-solid fa-store text-danger",
+    element: <TodasLojas />,
+    layout: "/admin",
+  },
+  {
+    path: "/editar-loja",
+    name: "Editar as Loja",
+    icon: "fa-solid fa-store text-danger",
+    element: <EditLoja />,
     layout: "/admin",
   }
 
