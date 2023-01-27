@@ -1,23 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import {
-  useLocation,
-  Route,
-  Navigate,
-  Routes,
-  matchRoutes,
-} from "react-router-dom";
-// reactstrap components
+import { useLocation, Route, Routes } from "react-router-dom";
+
 import { Container } from "reactstrap";
-// core components
 
 import { AnimatePresence } from "framer-motion";
 
 import routes from "../routes";
-import Footer from "../components/footer/AdminFooter";
+
 import AdminNavbar from "../components/navbar/AdminNavbar";
 import Sidebar from "../components/Sidebar/Sidebar";
-import { motion } from "framer-motion";
-const Admin = (props) => {
+
+const Admin = () => {
   const mainContent = useRef(null);
   const location = useLocation();
 
@@ -43,7 +36,7 @@ const Admin = (props) => {
     });
   };
 
-  const getBrandText = (path) => {
+  const getBrandText = () => {
     for (let i = 0; i < routes.length; i++) {
       if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
         return routes[i].name;
@@ -55,7 +48,9 @@ const Admin = (props) => {
   return (
     <>
       <Sidebar
-        routes={routes}
+        routes={routes.filter((route) => {
+          return route.showSidebar === true;
+        })}
         logo={{
           innerLink: "/admin/index",
           imgSrc: require("../assets/img/brand/logo_icc.png"),
@@ -63,7 +58,7 @@ const Admin = (props) => {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar brandText={getBrandText(props.location.pathname)} />
+        <AdminNavbar brandText={getBrandText()} />
 
         <AnimatePresence mode="wait">
           <Routes>{getRoutes(routes)}</Routes>

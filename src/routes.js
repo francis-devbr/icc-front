@@ -1,12 +1,8 @@
-import Grupo from "./views/Grupo";
 import Index from "./views/Index";
-import Liberacao from "./views/Liberacao";
+
 import TodasOcorrencias from "./views/TodasOcorrencias";
 import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
-import MNPEX from "./views/MNPEX";
-import NotaFiscal from "./views/NotaFiscal";
-import Relatorios from "./views/Relatorios";
-import Resgate from "./views/Resgate";
+
 
 var routes = [
   {
@@ -15,6 +11,7 @@ var routes = [
     icon: "ni ni-tv-2 text-primary",
     element: <Index />,
     layout: "/admin",
+    showSidebar: true,
   },
   {
     path: "/todas-ocorrencias",
@@ -22,6 +19,7 @@ var routes = [
     icon: "ni ni-folder-17 text-primary",
     element: <TodasOcorrencias />,
     layout: "/admin",
+    showSidebar: true,
   },
   {
     path: "/edit-cadastro-ocorrencia",
@@ -29,8 +27,7 @@ var routes = [
     icon: "ni ni-folder-17 text-primary",
     element: <EditCadastroOcorrencia />,
     layout: "/admin",
-  }
-
-  
+    showSidebar: false,
+  },
 ];
 export default routes;
