@@ -95,7 +95,7 @@ const TodasOcorrencias = (props) => {
                 </tr>
 
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row">2</th>
                   <td>Almir Peixoto Madureira</td>
                   <td> SP </td>
                   <td>CRFSAOPAULO3</td>

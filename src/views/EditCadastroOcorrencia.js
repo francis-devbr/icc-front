@@ -139,7 +139,7 @@ const EditCadastroOcorrencia = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md={12}>
             <CardHeader className="border-0">
               <FormGroup row>
                 <Row>
@@ -155,6 +155,220 @@ const EditCadastroOcorrencia = (props) => {
                   </Row>
               </FormGroup>
             </CardHeader>
+          </Col>
+          <Col md={12}>
+          <div className="col">
+            <Card className="shadow">
+                <div className="nav-wrapper">
+                  <Nav
+                    className="nav-fill flex-column flex-md-row"
+                    id="tabs-icons-text"
+                    pills
+                    role="tablist"
+                  >
+                    <NavItem>
+                      <NavLink
+                        aria-selected={state.tabs === 1}
+                        className={classnames("mb-sm-3 mb-md-0", {
+                          active: state.tabs === 1,
+                        })}
+                        onClick={(e) => toggleNavs(e, "tabs", 1)}
+                        href="#pablo"
+                        role="tab"
+                      >
+                        <i className="ni ni-cloud-upload-96 mr-2" />
+                        Video
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        aria-selected={state.tabs === 2}
+                        className={classnames("mb-sm-3 mb-md-0", {
+                          active: state.tabs === 2,
+                        })}
+                        onClick={(e) => toggleNavs(e, "tabs", 2)}
+                        href="#pablo"
+                        role="tab"
+                      >
+                        <i className="ni ni-bell-55 mr-2" />
+                        PDF's
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        aria-selected={state.tabs === 3}
+                        className={classnames("mb-sm-3 mb-md-0", {
+                          active: state.tabs === 3,
+                        })}
+                        onClick={(e) => toggleNavs(e, "tabs", 3)}
+                        href="#pablo"
+                        role="tab"
+                      >
+                        <i className="ni ni-calendar-grid-58 mr-2" />
+                        Imagens
+                      </NavLink>
+                    </NavItem>
+
+
+                    
+                  </Nav>
+                </div>
+                <Card className="shadow">
+                  <CardBody>
+                    <TabContent activeTab={"tabs" + state.tabs}>
+                      <TabPane tabId="tabs1">
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col">Cia</th>
+                              <th scope="col">Corretor</th>
+
+                              <th scope="col">Lideranca</th>
+                              <th scope="col">Sucursal</th>
+                              <th scope="col">Diretoria</th>
+                              <th scope="col">Producao</th>
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col">Classe</th>
+
+                              <th scope="col">Diretoria</th>
+                              <th scope="col">Superintendencia</th>
+                              <th scope="col">Sucursal</th>
+                              <th scope="col">Valor Limite Producao</th>
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </TabPane>
+                      <TabPane tabId="tabs2">
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col">Grupo Familia</th>
+                              <th scope="col">Valor Producao</th>
+
+                              <th scope="col">Ponto Basico</th>
+                              <th scope="col">Fator conv</th>
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </TabPane>
+                      <TabPane tabId="tabs3">
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col">Grupo</th>
+                              <th scope="col">Basico</th>
+
+                              <th scope="col">%</th>
+                              <th scope="col">Sinistralidade</th>
+                              <th scope="col">%</th>
+                              <th scope="col">Renovacao</th>
+                              <th scope="col">Categoria</th>
+                              <th scope="col">Extras</th>
+                              <th scope="col">Manuais</th>
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </TabPane>
+
+                      <TabPane tabId="tabs4">
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col">Regiao</th>
+                              <th scope="col">Verde - VE</th>
+
+                              <th scope="col">VE - Indireto</th>
+                              <th scope="col">Bronze - BR</th>
+                              <th scope="col">Prata - PR</th>
+                              <th scope="col">Ouro - OU</th>
+                              <th scope="col">Diamante - DI</th>
+
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </TabPane>
+
+                      <TabPane tabId="tabs5">
+                        <p className="description">fff</p>
+
+                        <Table
+                          className="align-items-center table-flush"
+                          responsive
+                        >
+                          <thead className="thead-light">
+                            <tr>
+                              <th scope="col">Grupo de Familia</th>
+                              <th scope="col">Grupo</th>
+                              <th scope="col">Apolices Renovadas</th>
+                              <th scope="col">Apolices Vencidas</th>
+                              <th scope="col">Indice Renovacao</th>
+                              <th scope="col" />
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </TabPane>
+                    </TabContent>
+                  </CardBody>
+                </Card>
+            </Card>
+          </div>
           </Col>
         </Row>
       </Container>
