@@ -1,0 +1,9 @@
+.icones-acao{
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.card .table td, .card .table th {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
