@@ -1,8 +1,12 @@
+import Grupo from "./views/Grupo";
 import Index from "./views/Index";
-
-import MemoriaCalculo from "./views/MemoriaCalculo";
-
+import Liberacao from "./views/Liberacao";
+import TodasOcorrencias from "./views/TodasOcorrencias";
+import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
+import MNPEX from "./views/MNPEX";
 import NotaFiscal from "./views/NotaFiscal";
+import Relatorios from "./views/Relatorios";
+import Resgate from "./views/Resgate";
 
 var routes = [
   {
@@ -12,20 +16,18 @@ var routes = [
     element: <Index />,
     layout: "/admin",
   },
-
   {
-    path: "/nota",
-    name: "Nota Fiscal",
-    icon: "fa fa-file-invoice-dollar text-primary",
-    element: <NotaFiscal />,
+    path: "/todas-ocorrencias",
+    name: "Todas as Ocorrências",
+    icon: "ni ni-folder-17 text-primary",
+    element: <TodasOcorrencias />,
     layout: "/admin",
   },
-
   {
-    path: "/memoria-calculo",
-    name: "Memoria de Calculo",
-    icon: "ni ni-money-coins text-primary",
-    element: <MemoriaCalculo />,
+    path: "/edit-cadastro-ocorrencia",
+    name: "Editar Cadastro de Ocorrência",
+    icon: "ni ni-folder-17 text-primary",
+    element: <EditCadastroOcorrencia />,
     layout: "/admin",
   },
 ];
