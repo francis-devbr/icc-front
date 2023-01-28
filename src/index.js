@@ -27,7 +27,7 @@ root.render(
   <ReactKeycloakProvider authClient={keycloak} >
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="*"
           element={
