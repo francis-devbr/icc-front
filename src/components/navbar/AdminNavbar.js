@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
-  const { keycloak, initialized } = useKeycloak();
+  const { keycloak } = useKeycloak();
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">

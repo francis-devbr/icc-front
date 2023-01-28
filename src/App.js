@@ -36,8 +36,8 @@ function App() {
         onEvent={onKeycloakEvent}
         onTokens={onKeycloakTokens}
       >
-        <SplashScreen keycloakReady={keycloakReady}>
-          <Router>
+        <Router>
+          <SplashScreen keycloakReady={keycloakReady}>
             <Routes>
               <Route
                 path="*"
@@ -48,8 +48,8 @@ function App() {
                 }
               />
             </Routes>
-          </Router>
-        </SplashScreen>
+          </SplashScreen>
+        </Router>
       </ReactKeycloakProvider>
     </>
   );
