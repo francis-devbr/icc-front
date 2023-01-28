@@ -55,9 +55,7 @@ const AdminNavbar = (props) => {
                   href="#pablo"
                   onClick={(e) => {
                     e.preventDefault();
-                    keycloak.logout({
-                      redirectUri: "http://localhost:3000",
-                    });
+                    keycloak.logout();
                   }}
                 >
                   <i className="ni ni-user-run" />

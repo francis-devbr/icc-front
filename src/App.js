@@ -20,10 +20,6 @@ function App() {
     console.log("onKeycloakTokens", tokens);
   };
 
-  useEffect(() => {
-    document.title = "IC Carrefour";
-  }, []);
-
   return (
     <>
       <ReactKeycloakProvider
