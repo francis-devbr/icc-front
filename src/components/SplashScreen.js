@@ -1,4 +1,3 @@
-
 const SplashScreen = ({ children, keycloakReady }) => {
   console.log(`SplashScreen keycloak ready ${keycloakReady}`);
 

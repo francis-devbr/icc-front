@@ -4,7 +4,7 @@ import { ReactKeycloakProvider } from "@react-keycloak/web";
 import keycloak from "./Keycloak";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminLayout from "./layout/Admin";
-import SplashScreen from "./views/SplashScreen";
+import SplashScreen from "./components/SplashScreen";
 function App() {
   const [keycloakReady, setKeycloakReady] = useState(false);
 

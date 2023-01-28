@@ -1,42 +1,42 @@
-.icones-acao{
-    font-size: 15px;
-    margin-right: 10px;
+.icones-acao {
+  font-size: 15px;
+  margin-right: 10px;
 }
 
-.card .table td, .card .table th {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.card .table td,
+.card .table th {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .navbar-vertical.navbar-expand-md .navbar-nav .nav-link {
-    padding: 0.65rem 1rem;
+  padding: 0.65rem 1rem;
 }
 
 .loader-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.834);
-    z-index: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
 }
 
 .spinner {
-    width: 64px;
-    height: 64px;
-    border: 8px solid;
-    border-color: #3d5af1 transparent #3d5af1 transparent;
-    border-radius: 50%;
-    animation: spin-anim 1.2s linear infinite;
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #3d5af1 transparent #3d5af1 transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
 }
 
 @keyframes spin-anim {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
