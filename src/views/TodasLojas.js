@@ -5,36 +5,17 @@ import {
   Row,
   Col,
   CardHeader,
-  CardBody,
   Form,
-  CardFooter,
   FormGroup,
   Input,
   Button,
   Table,
   Label,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
-  Badge,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Progress,
-  UncontrolledTooltip,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  InputGroup,
-  InputGroupText
-
+  ModalFooter
 } from "reactstrap";
-import classnames from "classnames";
 import HeaderNoInfo from "../components/header/HeaderNoInfo";
 const TodasLojas = (props) => {
   const [state, setState] = useState({
