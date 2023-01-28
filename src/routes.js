@@ -2,7 +2,7 @@ import Index from "./views/Index";
 
 import TodasOcorrencias from "./views/TodasOcorrencias";
 import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
-
+import TodasLojas from "./views/TodasLojas";
 
 var routes = [
   {
@@ -28,6 +28,14 @@ var routes = [
     element: <EditCadastroOcorrencia />,
     layout: "/admin",
     showSidebar: false,
+  },
+  {
+    path: "/todas-lojas",
+    name: "Todas as Lojas",
+    icon: "ni ni-folder-17 text-primary",
+    element: <TodasLojas />,
+    layout: "/admin",
+    showSidebar: true,
   },
 ];
 export default routes;
