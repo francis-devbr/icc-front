@@ -56,7 +56,7 @@ const AdminNavbar = (props) => {
                   onClick={(e) => {
                     e.preventDefault();
                     keycloak.logout({
-                      redirectUri: "http://localhost:3000",
+                      redirectUri: "http://localhost:3000/login",
                     });
                   }}
                 >
