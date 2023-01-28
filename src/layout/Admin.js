@@ -3,7 +3,6 @@ import { useLocation, Route, Routes } from "react-router-dom";
 
 import { Container } from "reactstrap";
 
-import { AnimatePresence } from "framer-motion";
 
 import routes from "../routes";
 
@@ -60,9 +59,8 @@ const Admin = () => {
       <div className="main-content" ref={mainContent}>
         <AdminNavbar brandText={getBrandText()} />
 
-        <AnimatePresence mode="wait">
-          <Routes>{getRoutes(routes)}</Routes>
-        </AnimatePresence>
+        <Routes>{getRoutes(routes)}</Routes>
+
         <Container fluid></Container>
       </div>
     </>
