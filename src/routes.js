@@ -3,6 +3,7 @@ import Index from "./views/Index";
 import TodasOcorrencias from "./views/TodasOcorrencias";
 import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
 import TodasLojas from "./views/TodasLojas";
+import EditCadastroLoja from "./views/EditCadastroLoja";
 
 var routes = [
   {
@@ -22,7 +23,7 @@ var routes = [
     showSidebar: true,
   },
   {
-    path: "/edit-cadastro-ocorrencia",
+    path: "/ocorrencia/:id/:acao",
     name: "Editar Cadastro de Ocorrência",
     icon: "ni ni-folder-17 text-primary",
     element: <EditCadastroOcorrencia />,
@@ -36,6 +37,15 @@ var routes = [
     element: <TodasLojas />,
     layout: "/admin",
     showSidebar: true,
+  },
+
+  {
+    path: "/loja/:id/:acao",
+    name: "Editar Cadastro de Ocorrência",
+    icon: "ni ni-folder-17 text-primary",
+    element: <EditCadastroLoja />,
+    layout: "/admin",
+    showSidebar: false,
   },
 ];
 export default routes;
