@@ -21,7 +21,7 @@ import {
 } from "reactstrap";
 import { useOcorrenciasMutation } from "../app/api/ocorrenciasApiSlice";
 import HeaderNoInfo from "../components/header/HeaderNoInfo";
-const TodasOcorrencias = (props) => {
+const Ocorrencias = (props) => {
   const [ocorrencias, { isLoading, isSuccess }] = useOcorrenciasMutation();
 
   const getAll = async () => {
@@ -211,4 +211,4 @@ const TodasOcorrencias = (props) => {
   );
 };
 
-export default TodasOcorrencias;
+export default Ocorrencias;

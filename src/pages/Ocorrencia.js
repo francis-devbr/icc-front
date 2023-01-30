@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import HeaderNoInfo from "../components/header/HeaderNoInfo";
-const EditCadastroOcorrencia = (props) => {
+const Ocorrencia = (props) => {
   const [state, setState] = useState({
     tabs: 1,
   });
@@ -393,4 +393,4 @@ const EditCadastroOcorrencia = (props) => {
   );
 };
 
-export default EditCadastroOcorrencia;
+export default Ocorrencia;

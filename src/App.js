@@ -5,6 +5,7 @@ import keycloak from "./Keycloak";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminLayout from "./layout/Admin";
 import SplashScreen from "./components/SplashScreen";
+import { useLojasMutation } from "./app/api/lojasApiSlice";
 function App() {
   const [keycloakReady, setKeycloakReady] = useState(false);
 

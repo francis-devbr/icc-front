@@ -1,9 +1,9 @@
-import Index from "./views/Index";
+import Index from "./pages/Index";
 
-import TodasOcorrencias from "./views/TodasOcorrencias";
-import EditCadastroOcorrencia from "./views/EditCadastroOcorrencia";
-import TodasLojas from "./views/TodasLojas";
-import EditCadastroLoja from "./views/EditCadastroLoja";
+import Lojas from "./pages/loja/Lojas";
+import Loja from "./pages/loja/Loja";
+import Ocorrencias from "./pages/Ocorrencias";
+import Ocorrencia from "./pages/Ocorrencia";
 
 var routes = [
   {
@@ -15,35 +15,44 @@ var routes = [
     showSidebar: true,
   },
   {
-    path: "/todas-ocorrencias",
+    path: "/ocorrencias",
     name: "Todas as Ocorrências",
     icon: "ni ni-folder-17 text-primary",
-    element: <TodasOcorrencias />,
+    element: <Ocorrencias />,
     layout: "/admin",
     showSidebar: true,
   },
   {
-    path: "/ocorrencia/:id/:acao",
+    path: "/ocorrencias/:id/:acao",
     name: "Editar Cadastro de Ocorrência",
     icon: "ni ni-folder-17 text-primary",
-    element: <EditCadastroOcorrencia />,
+    element: <Ocorrencia />,
     layout: "/admin",
     showSidebar: false,
   },
   {
-    path: "/todas-lojas",
-    name: "Todas as Lojas",
+    path: "/lojas",
+    name: "Lojas",
     icon: "ni ni-folder-17 text-primary",
-    element: <TodasLojas />,
+    element: <Lojas />,
     layout: "/admin",
     showSidebar: true,
   },
 
   {
-    path: "/loja/:id/:acao",
+    path: "/lojas/:id/:acao",
     name: "Editar Cadastro de Ocorrência",
     icon: "ni ni-folder-17 text-primary",
-    element: <EditCadastroLoja />,
+    element: <Loja />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/lojas/:acao",
+    name: "Editar Cadastro de Ocorrência",
+    icon: "ni ni-folder-17 text-primary",
+    element: <Loja />,
     layout: "/admin",
     showSidebar: false,
   },
