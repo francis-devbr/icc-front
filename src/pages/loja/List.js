@@ -11,7 +11,9 @@ function List() {
     const get = async () => {
       await lojas();
     };
+
     get();
+
   }, []);
 
   return (
@@ -43,7 +45,7 @@ function List() {
                   <Link to={`/admin/lojas/${loja.id}/view`}>
                     <i className="fa-solid fa-eye text-dark icones-acao"></i>
                   </Link>
-                  <Link to="/admin/lojas/1/edit">
+                  <Link to={`/admin/lojas/${loja.id}/edit`}>
                     <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
                   </Link>
                   <i className="fa-solid fa-trash-can text-danger icones-acao"></i>

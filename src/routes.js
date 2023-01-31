@@ -33,7 +33,7 @@ var routes = [
   {
     path: "/lojas",
     name: "Lojas",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "fa-solid fa-store text-primary",
     element: <Lojas />,
     layout: "/admin",
     showSidebar: true,
