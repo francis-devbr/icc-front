@@ -20,10 +20,11 @@ import { useNavigate } from "react-router-dom";
 
 import { useGetUfsMutation } from "../../../app/api/cep/ufApiSlice";
 import { useGetFormatosMutation } from "../../../app/api/formatoLojaApiSlice";
+import { useKeycloak } from "@react-keycloak/web";
 
 const Forms = (props) => {
   const navigate = useNavigate();
-
+  const { keycloak } = useKeycloak();
   const [addLoja] = useAddLojaMutation();
   const [getCep] = useGetCepMutation();
   const [loja] = useLojaMutation();
@@ -120,9 +121,7 @@ const Forms = (props) => {
 
           <Col md="3">
             <FormGroup>
-              <Label for="formato">
-                Formato
-              </Label>
+              <Label for="formato">Formato</Label>
 
               <Input
                 id="formato"
@@ -144,17 +143,13 @@ const Forms = (props) => {
           </Col>
           <Col md="4">
             <FormGroup>
-              <Label for="bandeira">
-                 Bandeira
-              </Label>
+              <Label for="bandeira">Bandeira</Label>
               <Input id="bandeira" name="bandeira" type="text" />
             </FormGroup>
           </Col>
           <Col md="4">
             <FormGroup>
-              <Label for="unidade">
-               Unidade
-              </Label>
+              <Label for="unidade">Unidade</Label>
               <Input
                 id="unidade"
                 name="unidade"
@@ -302,16 +297,18 @@ const Forms = (props) => {
         <hr />
 
         {props.acao === "view" ? (
-          <Button
-            color="primary"
-            className="btn  mb-2 w-25"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`/admin/lojas/${id}/edit`);
-            }}
-          >
-            <i className="fa-solid fa-check"></i> Editar
-          </Button>
+          keycloak?.hasResourceRole("manager") && (
+            <Button
+              color="primary"
+              className="btn  mb-2 w-25"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/admin/lojas/${id}/edit`);
+              }}
+            >
+              <i className="fa-solid fa-check"></i> Editar
+            </Button>
+          )
         ) : (
           <>
             <Button

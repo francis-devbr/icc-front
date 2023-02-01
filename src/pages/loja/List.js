@@ -2,8 +2,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import { useLojasMutation } from "../../app/api/lojasApiSlice";
+import { useKeycloak } from "@react-keycloak/web";
+import LoadingPage from "../../components/LoadingPage";
 
 function List() {
+  const { keycloak } = useKeycloak();
   const [lojas, { data, error, isLoading, isFetching, isSuccess }] =
     useLojasMutation();
 
@@ -13,13 +16,13 @@ function List() {
     };
 
     get();
-
   }, []);
 
   return (
-    <>
+    <Table className="align-items-center table-flush" responsive hover>
+      {isLoading && <LoadingPage />}
       {isSuccess && (
-        <Table className="align-items-center table-flush" responsive>
+        <>
           <thead className="thead-light">
             <tr>
               <th scope="col">#ID</th>
@@ -45,17 +48,21 @@ function List() {
                   <Link to={`/admin/lojas/${loja.id}/view`}>
                     <i className="fa-solid fa-eye text-dark icones-acao"></i>
                   </Link>
-                  <Link to={`/admin/lojas/${loja.id}/edit`}>
-                    <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
-                  </Link>
-                  <i className="fa-solid fa-trash-can text-danger icones-acao"></i>
+                  {keycloak?.hasResourceRole("manager") && (
+                    <>
+                      <Link to={`/admin/lojas/${loja.id}/edit`}>
+                        <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
+                      </Link>
+                      <i className="fa-solid fa-trash-can text-danger icones-acao"></i>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
-        </Table>
+        </>
       )}
-    </>
+    </Table>
   );
 }
 

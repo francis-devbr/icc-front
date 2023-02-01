@@ -1,30 +1,61 @@
+import { useState } from "react";
+
+import classnames from "classnames";
+import Chart from "chart.js/auto";
+// react plugin used to create charts
+import { Line, Bar } from "react-chartjs-2";
 import {
   Card,
+  CardHeader,
+  CardBody,
+  NavItem,
+  NavLink,
+  Nav,
   Container,
   Row,
-  CardHeader,
-  CardFooter,
-  Table,
+  Col,
 } from "reactstrap";
-import HeaderNoInfo from "../components/header/HeaderNoInfo";
+import {
+  chartOptions,
+  parseOptions,
+  chartExample1,
+  chartExample2,
+} from "../app/charts";
+import Header from "../components/header/Header";
+
 const Index = (props) => {
+  const [activeNav, setActiveNav] = useState(1);
+
+  const toggleNavs = (e, index) => {
+    e.preventDefault();
+    setActiveNav(index);
+  };
   return (
     <>
-      <HeaderNoInfo />
+      <Header />
+      {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
-          <div className="col">
+          <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="shadow">
-              <CardHeader className="border-0">
-                <h3 className="mb-0">Card tables</h3>
+              <CardHeader className="bg-transparent">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h6 className="text-uppercase text-muted ls-1 mb-1">
+                      Performance
+                    </h6>
+                    <h2 className="mb-0">Total orders</h2>
+                  </div>
+                </Row>
               </CardHeader>
-              <Table
-                className="align-items-center table-flush"
-                responsive
-              ></Table>
-              <CardFooter className="py-4"></CardFooter>
+              <CardBody>
+                {/* Chart */}
+                <div className="chart">
+                  <Bar data={chartExample2.data} />
+                </div>
+              </CardBody>
             </Card>
-          </div>
+          </Col>
         </Row>
       </Container>
     </>
