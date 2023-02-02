@@ -2,8 +2,8 @@ import Index from "./pages/Index";
 
 import Lojas from "./pages/loja/Lojas";
 import Loja from "./pages/loja/Loja";
-import Ocorrencias from "./pages/Ocorrencias";
-import Ocorrencia from "./pages/Ocorrencia";
+import Ocorrencias from "./pages/ocorrencia/Ocorrencias";
+import Ocorrencia from "./pages/ocorrencia/Ocorrencia";
 
 var routes = [
   {
@@ -16,11 +16,20 @@ var routes = [
   },
   {
     path: "/ocorrencias",
-    name: "Todas as Ocorrências",
+    name: "Ocorrências",
     icon: "ni ni-folder-17 text-primary",
     element: <Ocorrencias />,
     layout: "/admin",
     showSidebar: true,
+  },
+
+  {
+    path: "/ocorrencias/:acao",
+    name: "Editar Cadastro de Ocorrência",
+    icon: "ni ni-folder-17 text-primary",
+    element: <Ocorrencia />,
+    layout: "/admin",
+    showSidebar: false,
   },
   {
     path: "/ocorrencias/:id/:acao",
@@ -41,7 +50,7 @@ var routes = [
 
   {
     path: "/lojas/:id/:acao",
-    name: "Editar Cadastro de Ocorrência",
+    name: "Editar Cadastro de Loja",
     icon: "ni ni-folder-17 text-primary",
     element: <Loja />,
     layout: "/admin",
@@ -50,7 +59,7 @@ var routes = [
 
   {
     path: "/lojas/:acao",
-    name: "Editar Cadastro de Ocorrência",
+    name: "Editar Cadastro de Loja",
     icon: "ni ni-folder-17 text-primary",
     element: <Loja />,
     layout: "/admin",

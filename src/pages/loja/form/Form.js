@@ -107,7 +107,7 @@ const Forms = (props) => {
           <Col md="1">
             <FormGroup>
               <Label for="id">
-                <i className="fa-solid fa-store"></i> ID
+                <i class="fa-solid fa-hashtag"></i> ID
               </Label>
               <Input
                 id="id"
@@ -258,7 +258,7 @@ const Forms = (props) => {
             </FormGroup>
           </Col>
 
-          <Col md="1">
+          <Col md="2">
             <FormGroup>
               <Label for="uf">UF</Label>
 
@@ -274,7 +274,7 @@ const Forms = (props) => {
                 <option></option>
                 {ufs?.map((u) => (
                   <option key={u.id} value={u.sigla}>
-                    {u.sigla}
+                    {u.nome}
                   </option>
                 ))}
               </Input>
