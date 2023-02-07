@@ -31,7 +31,9 @@ const AdminNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("../../assets/img/theme/avatar-7.png")}
+                      src={require(keycloak?.hasResourceRole("manager")
+                        ? "../../assets/img/theme/avatar-7.png"
+                        : "../../assets/img/theme/avatar.jpg")}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
