@@ -1,0 +1,18 @@
+{
+  "ocorrencia": {
+    "status": [
+      {
+        "id": "aberto",
+        "name": "Aberto"
+      },
+      {
+        "id": "andamento",
+        "name": "Em Andamento"
+      },
+      {
+        "id": "encerrado",
+        "name": "Encerrado"
+      }
+    ]
+  }
+}

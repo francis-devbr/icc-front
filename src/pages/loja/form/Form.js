@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {toast } from "react-toastify";
 
 import {
   Button,
@@ -13,6 +14,7 @@ import {
 } from "reactstrap";
 import {
   useAddLojaMutation,
+  useGetLojaMutation,
   useLojaMutation,
 } from "../../../app/api/lojasApiSlice";
 import { useGetCepMutation } from "../../../app/api/cepApiSlice";
@@ -27,26 +29,63 @@ const Forms = (props) => {
   const { keycloak } = useKeycloak();
   const [addLoja] = useAddLojaMutation();
   const [getCep] = useGetCepMutation();
-  const [loja] = useLojaMutation();
+  const [getLoja] = useGetLojaMutation();
+
+  const [loja, setLoja] = useState({
+    sigla: "",
+    nome: "",
+    formato: {},
+    bandeira: {},
+    cep: "",
+    numero: "",
+    complemento: "",
+    logradouro: {
+      id: 0,
+      nome: "",
+      complemento: "",
+      bairro: {
+        id: 0,
+        nome: "",
+        localidade: {
+          id: 0,
+          nome: "",
+          uf: {
+            id: 0,
+            nome: "",
+            sigla: "",
+            regiao: {
+              id: 0,
+              nome: "",
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const { id, sigla, nome, formato, cep, numero, complemento, logradouro } =
+    loja;
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setLoja((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const [getFormatos] = useGetFormatosMutation();
 
   const [getUfs] = useGetUfsMutation();
-  const [id, setId] = useState(null);
-  const [nome, setNome] = useState("");
+
   const [formatos, setFormatos] = useState([]);
-  const [formato, setFormato] = useState("");
-  const [bandeira, setBandeira] = useState("");
-  const [cep, setCep] = useState("");
+
   const [regiao, setRegiao] = useState("");
 
   const [ufs, setUfs] = useState([]);
   const [uf, setUf] = useState("");
   const [localidade, setLocalidade] = useState("");
   const [bairro, setBairro] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [numero, setNumero] = useState("");
-  const [complemento, setComplemento] = useState("");
 
   useEffect(() => {
     const formatosLoja = async () => {

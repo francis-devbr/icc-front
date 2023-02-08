@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
-import { useLojasMutation } from "../../app/api/lojasApiSlice";
+import { useGetLojasMutation } from "../../app/api/lojasApiSlice";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingPage from "../../components/LoadingPage";
 
 function List() {
   const { keycloak } = useKeycloak();
   const [lojas, { data, error, isLoading, isFetching, isSuccess }] =
-    useLojasMutation();
+    useGetLojasMutation();
 
   useEffect(() => {
     const get = async () => {

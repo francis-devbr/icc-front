@@ -3,10 +3,10 @@ import { apiSlice } from "./apiSlice";
 const lojaApiSlice = apiSlice.injectEndpoints({
  
   endpoints: (builder) => ({
-    lojas: builder.mutation({
+    getLojas: builder.mutation({
       query: () => "/lojas/v1",
     }),
-    loja: builder.mutation({
+    getLoja: builder.mutation({
       query: ({ id }) => `/lojas/v1/${id}`,
     }),
     addLoja: builder.mutation({
@@ -26,4 +26,4 @@ const lojaApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLojasMutation, useLojaMutation, useAddLojaMutation, useUpdateLojaMutation } = lojaApiSlice;
+export const { useGetLojasMutation, useGetLojaMutation, useAddLojaMutation, useUpdateLojaMutation } = lojaApiSlice;

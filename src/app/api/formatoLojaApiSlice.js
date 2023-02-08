@@ -5,7 +5,7 @@ const formatoLojaApiSlice = apiSlice.injectEndpoints({
     getFormatos: builder.mutation({
       query: () => "/formatos/v1",
     }),
-    formato: builder.mutation({
+    getFormato: builder.mutation({
       query: ({ id }) => `/formatos/v1/${id}`,
     }),
     addFormato: builder.mutation({
@@ -22,12 +22,20 @@ const formatoLojaApiSlice = apiSlice.injectEndpoints({
         body: { rest },
       }),
     }),
+
+    deleteFormato: builder.mutation({
+      query: (id) => ({
+        url: `/formatos/v1/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetFormatosMutation,
-  useFormatoMutation,
+  useGetFormatoMutation,
   useAddFormatoMutation,
   useUpdateFormatoMutation,
+  useDeleteFormatoMutation,
 } = formatoLojaApiSlice;

@@ -5,7 +5,9 @@ import routes from "../routes";
 
 import AdminNavbar from "../components/navbar/AdminNavbar";
 import Sidebar from "../components/sidebar/Sidebar";
+import { Flip, ToastContainer } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 const Admin = () => {
   const mainContent = useRef(null);
   const location = useLocation();
@@ -55,8 +57,8 @@ const Admin = () => {
       />
 
       <div className="main-content" ref={mainContent}>
+        <ToastContainer transition={Flip} />
         <AdminNavbar brandText={getBrandText()} />
-
         <Routes>{getRoutes(routes)}</Routes>
       </div>
     </>

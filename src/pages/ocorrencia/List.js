@@ -1,24 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Badge, Table } from "reactstrap";
-import { useLojasMutation } from "../../app/api/lojasApiSlice";
+import { Badge, Button, Table } from "reactstrap";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingPage from "../../components/LoadingPage";
-import { useOcorrenciasMutation } from "../../app/api/ocorrenciasApiSlice";
+
+import { toast } from "react-toastify";
+import { useDeleteOcorrenciaMutation, useGetOcorrenciasMutation } from "../../app/api/ocorrencia/ocorrenciaApiSlice";
 
 function List() {
   const { keycloak } = useKeycloak();
 
-  const [ocorrencias, { data, error, isLoading, isFetching, isSuccess }] =
-    useOcorrenciasMutation();
+  const [getOcorrencias, { data, error, isLoading, isFetching, isSuccess }] =
+    useGetOcorrenciasMutation();
+
+  const [deleteOcorrencia] = useDeleteOcorrenciaMutation();
+
+  const [ocorrencias, setOcorrencias] = useState(null);
 
   useEffect(() => {
-    const get = async () => {
-      await ocorrencias();
-    };
-
-    get();
+    getOcorrencias().then((x) => setOcorrencias(x.data));
   }, []);
+
+  async function remove(id) {
+    await toast
+      .promise(deleteOcorrencia(id), {
+        pending: "Apagando...",
+        success: "Registro Excluido...",
+        error: "Erro ao Excluir",
+      })
+      .then(() =>
+        setOcorrencias((naturezas) => naturezas.filter((x) => x.id !== id))
+      );
+  }
 
   return (
     <Table className="align-items-center table-flush" responsive hover>
@@ -28,43 +41,47 @@ function List() {
           <thead className="thead-light">
             <tr>
               <th scope="col">#ID</th>
-              <th scope="col">Profissional</th>
-              <th scope="col">UF</th>
+              <th scope="col">Protocolo</th>
+              <th scope="col">Inquerito Policial</th>
+              <th scope="col">Data Ocorrencia</th>
+              <th scope="col">Data Encerramento</th>
               <th scope="col">Loja</th>
-              <th scope="col">Responsável</th>
-              <th className="text-center" scope="col">
-                STATUS
-              </th>
+              <th scope="col">U.F</th>
+              <th scope="col">Colaborador</th>
+              <th scope="col">Status</th>
+              <th scope="col">Responsavel</th>
               <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Weberson Designer</td>
-              <td> SP </td>
-              <td>CRFSAOPAULO3</td>
-              <td>Almir Peixoto Madureira</td>
-              <td className="text-center">
-                <Badge color="success" className="badge-dot px-2 text-white">
-                  Concluido
-                </Badge>
-              </td>
-
-              <td>
-                <Link to={`/admin/ocorrencias/${1}/view`}>
-                  <i className="fa-solid fa-eye text-dark icones-acao"></i>
-                </Link>
-                {keycloak?.hasResourceRole("manager") && (
-                  <>
-                    <Link to={`/admin/ocorrencias/${1}/edit`}>
-                      <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
-                    </Link>
-                    <i className="fa-solid fa-trash-can text-danger icones-acao"></i>
-                  </>
-                )}
-              </td>
-            </tr>
+            {ocorrencias?.map((ocorrencia) => (
+              <tr key={ocorrencia.id}>
+                <th scope="row">{ocorrencia.id}</th>
+                <td>{ocorrencia.protocolo}</td>
+                <td>{}</td>
+                <td>{ocorrencia.data_ocorrencia}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>
+                  <Link to={`/admin/ocorrencias/${ocorrencia.id}/view`}>
+                    <i className="fa-solid fa-eye text-dark icones-acao"></i>
+                  </Link>
+                  <Link to={`/admin/ocorrencias/${ocorrencia.id}/edit`}>
+                    <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
+                  </Link>
+                  <Button
+                    onClick={() => remove(ocorrencia.id)}
+                    className="btn btn-sm btn-danger btn-delete-user"
+                  >
+                    <span>Delete</span>
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </>
       )}
