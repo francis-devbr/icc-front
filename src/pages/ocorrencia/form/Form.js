@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { useGetNaturezasMutation } from "../../../app/api/naturezaFatoApiSlice";
 import { toast } from "react-toastify";
 import { useAddOcorrenciaMutation, useGetOcorrenciaMutation } from "../../../app/api/ocorrencia/ocorrenciaApiSlice";
+import UploadImages from "../upload/UploadImages";
 
 
 const Forms = (props) => {
@@ -302,10 +303,7 @@ const Forms = (props) => {
         <Row>
           <Col md="6">
             <FormGroup row>
-              <Label for="exampleFile">
-                <i class="fa-regular fa-file-pdf"></i> Inserir Arquivos
-              </Label>
-              <Input id="exampleFile" name="file" type="file" />
+             <UploadImages/>
             </FormGroup>
           </Col>
         </Row>
