@@ -18,6 +18,7 @@ import { useGetNaturezasMutation } from "../../../app/api/naturezaFatoApiSlice";
 import { toast } from "react-toastify";
 import { useAddOcorrenciaMutation, useGetOcorrenciaMutation } from "../../../app/api/ocorrencia/ocorrenciaApiSlice";
 import UploadImages from "../upload/UploadImages";
+import UploadVideos from "../upload/UploadVideos";
 
 
 const Forms = (props) => {
@@ -303,7 +304,7 @@ const Forms = (props) => {
         <Row>
           <Col md="6">
             <FormGroup row>
-             <UploadImages/>
+             <UploadVideos/>
             </FormGroup>
           </Col>
         </Row>
