@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { useAddOcorrenciaMutation, useGetOcorrenciaMutation } from "../../../app/api/ocorrencia/ocorrenciaApiSlice";
 import UploadImages from "../upload/UploadImages";
 import UploadVideos from "../upload/UploadVideos";
+import LoadingPage from "../../../components/LoadingPage";
 
 
 const Forms = (props) => {
@@ -27,7 +28,7 @@ const Forms = (props) => {
 
   const [getNaturezas] = useGetNaturezasMutation();
   
-  const [getOcorrencia] = useGetOcorrenciaMutation();
+  const [getOcorrencia, { isLoading, isSuccess }] = useGetOcorrenciaMutation();
   const [addOcorrencia] = useAddOcorrenciaMutation();
 
   const [naturezas, setNaturezas] = useState(null);
@@ -103,7 +104,8 @@ const Forms = (props) => {
   const [isRelatorio, setIsRelatorio] = useState("NAO");
 
   return (
-    <>
+     <>{isLoading && <LoadingPage />}
+     {isSuccess && (
       <Form role="form">
         <Row>
           <Col md="3">
@@ -344,6 +346,7 @@ const Forms = (props) => {
           <i className="fa-solid fa-check"></i> Cancelar
         </Button>
       </Form>
+     )}
     </>
   );
 };

@@ -5,7 +5,7 @@ const upload = (id,file, onUploadProgress) => {
 
   formData.append("file", file);
 
-  return http.post(`/ocorrencias/files/upload${id}`, formData, {
+  return http.post(`/ocorrencias/files/upload/${id}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -14,6 +14,7 @@ const upload = (id,file, onUploadProgress) => {
 };
 
 const getFiles = (id) => {
+  console.log("asssss")
   return http.get(`/ocorrencias/files/${id}`);
 };
 
