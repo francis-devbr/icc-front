@@ -57,7 +57,7 @@ const List = (props) => {
                   </Link>
                   <button
                     onClick={() => remove(natureza.id)}
-                    className="btn btn-sm btn-danger btn-delete-user"
+                    className="btn-delete-user"
                   >
                     <span>Delete</span>
                   </button>

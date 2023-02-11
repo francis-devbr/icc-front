@@ -22,7 +22,7 @@ const Forms = (props) => {
     if (props?.id) {
       const get = async () => {
         const response = await getNatureza({ id: props.id });
-        setNatureza({ id: response.data.id, nome: response.data.nome });
+        setNatureza(response.data);
       };
       get();
     }

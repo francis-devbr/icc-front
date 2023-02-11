@@ -304,7 +304,7 @@ const Forms = (props) => {
         <Row>
           <Col md="6">
             <FormGroup row>
-             <UploadVideos/>
+              <UploadVideos id={protocolo} />
             </FormGroup>
           </Col>
         </Row>

@@ -1,11 +1,11 @@
 import http from "../../../http-common";
 
-const upload = (file, onUploadProgress) => {
+const upload = (id,file, onUploadProgress) => {
   let formData = new FormData();
 
   formData.append("file", file);
 
-  return http.post("/ocorrencias/files/upload", formData, {
+  return http.post(`/ocorrencias/files/upload${id}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -13,8 +13,8 @@ const upload = (file, onUploadProgress) => {
   });
 };
 
-const getFiles = () => {
-  return http.get("/ocorrencias/files");
+const getFiles = (id) => {
+  return http.get(`/ocorrencias/files/${id}`);
 };
 
 const FileUploadService = {

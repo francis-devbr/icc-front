@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import FileUploadService from "../../../app/api/ocorrencia/upload-files.service";
 
-const UploadVideos = () => {
+const UploadVideos = (props) => {
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [progressInfos, setProgressInfos] = useState({ val: [] });
@@ -36,7 +36,7 @@ const UploadVideos = () => {
     const uploadPromises = files.map((file, i) => upload(i, file));
 
     Promise.all(uploadPromises)
-      .then(() => FileUploadService.getFiles())
+      .then(() => FileUploadService.getFiles(props.id))
       .then((files) => {
         setImageInfos(files.data);
       });
@@ -46,7 +46,7 @@ const UploadVideos = () => {
 
   const upload = (idx, file) => {
     let _progressInfos = [...progressInfosRef.current.val];
-    return FileUploadService.upload(file, (event) => {
+    return FileUploadService.upload(props.id, file, (event) => {
       _progressInfos[idx].percentage = Math.round(
         (100 * event.loaded) / event.total
       );
@@ -70,7 +70,7 @@ const UploadVideos = () => {
   };
 
   useEffect(() => {
-    FileUploadService.getFiles().then((response) => {
+    FileUploadService.getFiles(props.id).then((response) => {
       setImageInfos(response.data);
     });
   }, []);
