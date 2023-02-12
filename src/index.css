@@ -32,6 +32,10 @@
   animation: spin-anim 1.2s linear infinite;
 }
 
+.card-stats{
+  min-height: 147px;
+}
+
 @keyframes spin-anim {
   0% {
     transform: rotate(0deg);
