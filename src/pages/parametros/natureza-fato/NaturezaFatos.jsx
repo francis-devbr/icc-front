@@ -26,12 +26,12 @@ const NaturezaFatos = () => {
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button
-                    color="primary"
+                    color="success"
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/naturezas/new")}
                   >
-                    <i className="fa-solid fa-file-circle-plus"></i> Adicionar
-                    Novo Natureza
+                    <i className="ni ni-book-bookmark"></i> Adicionar
+                    Nova Natureza
                   </Button>
                 )}
               </CardHeader>

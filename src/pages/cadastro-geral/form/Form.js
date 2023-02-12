@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useAddNaturezaMutation, useGetNaturezaMutation } from "../../../../app/api/naturezaFatoApiSlice";
+import { useAddNaturezaMutation, useGetNaturezaMutation } from "../../../app/api/naturezaFatoApiSlice";
 
-import LoadingPage from "../../../../components/LoadingPage";
+import LoadingPage from "../../../components/LoadingPage";
 
 const Forms = (props) => {
   const navigate = useNavigate();
@@ -14,15 +14,15 @@ const Forms = (props) => {
 
   const [addNatureza] = useAddNaturezaMutation();
 
-  const [natureza, setNatureza] = useState({ id: null, nome: "" });
+  const [pessoa, setPessoa] = useState({ id: null, nome: "" });
 
-  const { id, nome } = natureza;
+  const {nome, cpf,statusPessoa } = pessoa;
 
   useEffect(() => {
     if (props?.id) {
       const get = async () => {
         const response = await getNatureza({ id: props.id });
-        setNatureza(response.data);
+        setPessoa(response.data);
       };
       get();
     }
@@ -30,7 +30,7 @@ const Forms = (props) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setNatureza((prevState) => ({
+    setPessoa((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -48,18 +48,19 @@ const Forms = (props) => {
 
     if (allFieldsFilled) {
       const data = {
-        id,
         nome,
+        cpf,
+        statusPessoa       
       };
 
       await toast
         .promise(addNatureza(data), {
           pending: "Salvando...",
-          success: "Natureza Salvo...",
+          success: "Ocorrência Interna Salva...",
           error: "Erro ao Salvar",
         })
         .then((r) => {
-          setNatureza((prevState) => ({
+          setPessoa((prevState) => ({
             ...prevState,
             id: r.data.id,
           }));
@@ -77,32 +78,53 @@ const Forms = (props) => {
       {!isLoading && (
         <Form role="form">
           <Row>
-            <Col md="1">
+            <Col md="3">
               <FormGroup>
-                <Label for="id">
-                  <i class="fa-solid fa-hashtag"></i> ID
-                </Label>
+                <Label for="nomeLoja">Nome Completo</Label>
                 <Input
-                  id="id"
-                  name="id"
-                  type="text"
-                  value={id}
-                  onChange={handleInputChange}
+                id="nome"
+                name="nome"
+                type="text"
+                placeholder="Digite o nome completo"
+                value={nome}
+                onChange={handleInputChange}
                 />
               </FormGroup>
             </Col>
-            <Col md="11">
+            <Col md="3">
               <FormGroup>
-                <Label for="nome">Nome</Label>
+                <Label for="nomeLoja">CPF</Label>
                 <Input
-                  id="nome"
-                  name="nome"
-                  type="text"
-                  value={nome}
-                  onChange={handleInputChange}
+                id="cpf"
+                name="cpf"
+                type="text"
+                placeholder="Ex: 000.000.000-00"
+                value={cpf}
+                onChange={handleInputChange}
                 />
               </FormGroup>
             </Col>
+            <Col md="3">
+              <FormGroup>
+                <Label for="nomeLoja">STATUS</Label>
+                <Input
+                  id="statusPessoa"
+                  name="statusPessoa"
+                  type="select"
+                  value={statusPessoa}
+                  onChange={handleInputChange}
+                >
+                 <option>Selecione a opção</option>
+                 <option>Fornecedor</option>
+                 <option>Funcionário</option>
+                 <option>Ex Funcionário</option>
+                 <option>Colaborador</option>
+                 <option>Externo</option>
+                    
+                </Input>
+              </FormGroup>
+            </Col>
+          
           </Row>
           <hr />
 
@@ -113,7 +135,7 @@ const Forms = (props) => {
                 className="btn  mb-2 w-25"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate(`/admin/naturezas/${id}/edit`);
+                  navigate(`/admin/naturezas/${nome}/edit`);
                 }}
               >
                 <i className="fa-solid fa-check"></i> Editar
@@ -135,7 +157,7 @@ const Forms = (props) => {
             className="btn  btn-danger mb-2 w-25"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/admin/naturezas");
+              navigate("/admin/pessoas");
             }}
           >
             <i className="fa-solid fa-times"></i> Cancelar

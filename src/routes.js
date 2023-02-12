@@ -10,12 +10,16 @@ import NaturezaFatos from "./pages/parametros/natureza-fato/NaturezaFatos";
 import Natureza from "./pages/parametros/natureza-fato/NaturezaFato";
 import OcorrenciasInterna from "./pages/ocorrencias-internas/OcorrenciasInterna";
 import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInternas";
+import Pessoas from "./pages/pessoas/Pessoas";
+import Pessoa from "./pages/pessoas/Pessoa";
+import CadastrosGerais from "./pages/cadastro-geral/CadastrosGerais";
+import CadastroGeral from "./pages/cadastro-geral/CadastroGeral";
 
 var routes = [
   {
     path: "/index",
     name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
+    icon: "ni ni-chart-bar-32 text-primary",
     element: <Index />,
     layout: "/admin",
     showSidebar: true,
@@ -57,7 +61,7 @@ var routes = [
   {
     path: "/lojas/:id/:acao",
     name: "Editar Cadastro de Loja",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "fa-solid fa-store text-primary",
     element: <Loja />,
     layout: "/admin",
     showSidebar: false,
@@ -66,7 +70,7 @@ var routes = [
   {
     path: "/lojas/:acao",
     name: "Editar Cadastro de Loja",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "fa-solid fa-store text-primary",
     element: <Loja />,
     layout: "/admin",
     showSidebar: false,
@@ -75,7 +79,7 @@ var routes = [
   {
     path: "/formatos",
     name: "Formato Loja",
-    icon: "fa-solid fa-store text-primary",
+    icon: "fas fa-store-slash text-primary",
     element: <Formatos />,
     layout: "/admin",
     showSidebar: true,
@@ -84,7 +88,7 @@ var routes = [
   {
     path: "/formatos/:id/:acao",
     name: "Editar Cadastro de Foramto Loja",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "fas fa-store-slash text-primary",
     element: <Formato />,
     layout: "/admin",
     showSidebar: false,
@@ -93,7 +97,7 @@ var routes = [
   {
     path: "/formatos/:acao",
     name: "Editar Cadastro de Formato Loja",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "fas fa-store-slash text-primary",
     element: <Formato />,
     layout: "/admin",
     showSidebar: false,
@@ -102,7 +106,7 @@ var routes = [
   {
     path: "/naturezas",
     name: "Natureza Fato",
-    icon: "fa-solid fa-store text-primary",
+    icon: "ni ni-book-bookmark text-primary",
     element: <NaturezaFatos />,
     layout: "/admin",
     showSidebar: true,
@@ -111,7 +115,7 @@ var routes = [
   {
     path: "/naturezas/:id/:acao",
     name: "Editar Cadastro de Naturezas Fato",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "ni ni-book-bookmark text-primary",
     element: <Natureza />,
     layout: "/admin",
     showSidebar: false,
@@ -120,7 +124,7 @@ var routes = [
   {
     path: "/naturezas/:acao",
     name: "Editar Cadastro de Naturezas Fato",
-    icon: "ni ni-folder-17 text-primary",
+    icon: "ni ni-book-bookmark text-primary",
     element: <Natureza />,
     layout: "/admin",
     showSidebar: false,
@@ -149,6 +153,58 @@ var routes = [
     name: "Editar Cadastro de Ocorrencias Internas",
     icon: "ni ni-briefcase-24 text-primary",
     element: <OcorrenciasInterna />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/pessoas",
+    name: "Pessoas",
+    icon: "ni ni-circle-08 text-primary",
+    element: <Pessoas />,
+    layout: "/admin",
+    showSidebar: true,
+  },
+
+  {
+    path: "/pessoas/:id/:acao",
+    name: "Editar Cadastro de Pessoas",
+    icon: "ni ni-circle-08 text-primary",
+    element: <Pessoa />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/pessoas/:acao",
+    name: "Editar Cadastro de Pessoas",
+    icon: "ni ni-circle-08 text-primary",
+    element: <Pessoa />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/cadastro-geral",
+    name: "Cadastro Geral",
+    icon: "fas fa-clipboard-check text-primary",
+    element: <CadastrosGerais />,
+    layout: "/admin",
+    showSidebar: true,
+  },
+
+  {
+    path: "/cadastro-geral/:id/:acao",
+    name: "Editar Cadastro Geral",
+    icon: "fas fa-clipboard-check text-primary",
+    element: <CadastroGeral />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/cadastro-geral/:acao",
+    name: "Editar Cadastro Geral",
+    icon: "fas fa-clipboard-check text-primary",
+    element: <CadastroGeral />,
     layout: "/admin",
     showSidebar: false,
   },

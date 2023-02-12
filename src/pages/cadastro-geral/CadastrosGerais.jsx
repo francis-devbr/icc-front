@@ -1,17 +1,24 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
-import { Card, Container, Row, Col, CardHeader, Button } from "reactstrap";
-
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Row,
+} from "reactstrap";
 import HeaderNoInfo from "../../components/header/HeaderNoInfo";
 import List from "./List";
-const Ocorrencias = (props) => {
+
+const CadastrosGerais = () => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
 
   return (
     <>
       <HeaderNoInfo />
-
       <Container className="mt--7" fluid>
         <Row>
           <Col>
@@ -21,14 +28,15 @@ const Ocorrencias = (props) => {
                   <Button
                     color="success"
                     className="btn mb-2 "
-                    onClick={() => navigate("/admin/ocorrencias/new")}
+                    onClick={() => navigate("/admin/pessoas/new")}
                   >
-                    <i className="ni ni-folder-17"></i> Adicionar
-                    Nova Ocorrência
+                    <i className="fas fa-clipboard-check"></i> Adicionar
                   </Button>
                 )}
-                <List />
               </CardHeader>
+              <CardBody>
+                <List />
+              </CardBody>
             </Card>
           </Col>
         </Row>
@@ -37,4 +45,4 @@ const Ocorrencias = (props) => {
   );
 };
 
-export default Ocorrencias;
+export default CadastrosGerais;
