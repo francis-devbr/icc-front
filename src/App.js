@@ -26,7 +26,7 @@ function App() {
         authClient={keycloak}
         initOptions={{
           onLoad: "login-required",
-          redirectUri: "http://localhost:3000/admin/index",
+          redirectUri: process.env.REACT_APP_BASE_URL_KEYCLOAK,
         }}
         keycloak={keycloak}
         onEvent={onKeycloakEvent}
