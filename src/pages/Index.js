@@ -1,38 +1,23 @@
-import { useState } from "react";
 
-import classnames from "classnames";
-import Chart from "chart.js/auto";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Card,
   CardHeader,
   CardBody,
-  NavItem,
-  NavLink,
-  Nav,
   Container,
   Row,
   Col,
 } from "reactstrap";
 import {
-  chartOptions,
-  parseOptions,
-  chartExample1,
   chartExample2,
 } from "../app/charts";
 import Header from "../components/header/Header";
 import { useKeycloak } from "@react-keycloak/web";
-import HeaderNoInfo from "../components/header/HeaderNoInfo";
 
 const Index = (props) => {
   const { keycloak } = useKeycloak();
-  const [activeNav, setActiveNav] = useState(1);
 
-  const toggleNavs = (e, index) => {
-    e.preventDefault();
-    setActiveNav(index);
-  };
   return (
     <>
       <Header />
@@ -56,9 +41,7 @@ const Index = (props) => {
                 <CardBody>
                   {/* Chart */}
 
-                  <div className="chart">
-                    <Bar data={chartExample2.data} />
-                  </div>
+                 
                 </CardBody>
               </Card>
             )}
