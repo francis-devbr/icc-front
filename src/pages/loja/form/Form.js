@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import {
   Button,
@@ -105,13 +105,10 @@ const Forms = (props) => {
     if (props?.id) {
       const get = async () => {
         const l = await loja({ id: props.id });
-        setId(l.data?.id);
-        setNome(l.data?.nome);
-        setFormato(l.data?.formato);
+
         setUf(l.data?.uf);
         setLocalidade(l.data?.localidade);
         setBairro(l.data?.bairro);
-        setLogradouro(l.data?.logradouro);
       };
       get();
     }
@@ -126,7 +123,6 @@ const Forms = (props) => {
   const postData = async (event) => {
     event.preventDefault();
     const l = await addLoja({ id: id, nome: nome });
-    setId(l.data?.id);
   };
 
   const findByCEP = async (event) => {
@@ -136,7 +132,6 @@ const Forms = (props) => {
     setUf(l.data?.uf);
     setLocalidade(l.data.localidade);
     setBairro(l.data.bairro);
-    setLogradouro(l.data.logradouro);
   };
 
   return (
@@ -153,7 +148,7 @@ const Forms = (props) => {
                 name="id"
                 type="text"
                 value={id}
-                onChange={(e) => setId(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -167,9 +162,7 @@ const Forms = (props) => {
                 name="formato"
                 type="select"
                 value={formato}
-                onChange={(e) => {
-                  setFormato(e.target.value);
-                }}
+                onChange={(e) => handleInputChange}
               >
                 <option></option>
                 {formatos?.map((f) => (
@@ -194,7 +187,7 @@ const Forms = (props) => {
                 name="unidade"
                 type="text"
                 value={nome}
-                onChange={(e) => setNome(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -222,7 +215,7 @@ const Forms = (props) => {
                   name="logradouro"
                   type="text"
                   value={cep}
-                  onChange={(e) => setCep(e.target.value)}
+                  onChange={(e) => handleInputChange}
                 />
                 <Button color="primary" onClick={(e) => findByCEP(e)}>
                   Pesquisar
@@ -239,7 +232,7 @@ const Forms = (props) => {
                 name="logradouro"
                 type="text"
                 value={logradouro}
-                onChange={(e) => setLogradouro(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -252,7 +245,7 @@ const Forms = (props) => {
                 name="numero"
                 type="text"
                 value={numero}
-                onChange={(e) => setNumero(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -265,7 +258,7 @@ const Forms = (props) => {
                 name="numero"
                 type="text"
                 value={complemento}
-                onChange={(e) => setComplemento(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -279,7 +272,7 @@ const Forms = (props) => {
                 name="bairro"
                 type="text"
                 value={bairro}
-                onChange={(e) => setBairro(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -292,7 +285,7 @@ const Forms = (props) => {
                 name="localidade"
                 type="text"
                 value={localidade}
-                onChange={(e) => setLocalidade(e.target.value)}
+                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>

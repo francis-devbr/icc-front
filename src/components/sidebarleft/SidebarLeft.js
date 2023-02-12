@@ -19,7 +19,7 @@ import {
 
 var ps;
 
-const Sidebar = (props) => {
+const SidebarLeft = (props) => {
   const [collapseOpen, setCollapseOpen] = useState();
 
   // toggles collapse between opened and closed (true/false)
@@ -128,11 +128,11 @@ const Sidebar = (props) => {
   );
 };
 
-Sidebar.defaultProps = {
+SidebarLeft.defaultProps = {
   routes: [{}],
 };
 
-Sidebar.propTypes = {
+SidebarLeft.propTypes = {
   // links that will be displayed inside the component
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
@@ -149,4 +149,4 @@ Sidebar.propTypes = {
   }),
 };
 
-export default Sidebar;
+export default SidebarLeft;

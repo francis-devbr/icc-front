@@ -4,10 +4,11 @@ import { useLocation, Route, Routes } from "react-router-dom";
 import routes from "../routes";
 
 import AdminNavbar from "../components/navbar/AdminNavbar";
-import Sidebar from "../components/sidebar/Sidebar";
+
 import { Flip, ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import SidebarLeft from "../components/sidebarleft/SidebarLeft";
 const Admin = () => {
   const mainContent = useRef(null);
   const location = useLocation();
@@ -45,7 +46,7 @@ const Admin = () => {
 
   return (
     <>
-      <Sidebar
+      <SidebarLeft
         routes={routes.filter((route) => {
           return route.showSidebar === true;
         })}
