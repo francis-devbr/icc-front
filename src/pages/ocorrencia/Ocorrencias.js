@@ -19,11 +19,11 @@ const Ocorrencias = (props) => {
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button
-                    color="primary"
+                    color="success"
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/ocorrencias/new")}
                   >
-                    <i className="fa-solid fa-file-circle-plus"></i> Adicionar
+                    <i className="ni ni-folder-17"></i> Adicionar
                     Nova Ocorrência
                   </Button>
                 )}

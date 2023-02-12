@@ -338,7 +338,7 @@ const Forms = (props) => {
             navigate("/admin/ocorrencias");
           }}
         >
-          <i className="fa-solid fa-check"></i> Cancelar
+          <i className="fa-solid fa-times"></i> Cancelar
         </Button>
       </Form>
     </>

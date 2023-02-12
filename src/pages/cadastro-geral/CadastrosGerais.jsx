@@ -1,5 +1,4 @@
 import { useKeycloak } from "@react-keycloak/web";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -10,11 +9,10 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import HeaderNoInfo from "../../../components/header/HeaderNoInfo";
+import HeaderNoInfo from "../../components/header/HeaderNoInfo";
 import List from "./List";
-import ModalNaturezaFato from "./ModalNaturezaFato";
 
-const NaturezaFatos = () => {
+const CadastrosGerais = () => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
 
@@ -30,10 +28,9 @@ const NaturezaFatos = () => {
                   <Button
                     color="success"
                     className="btn mb-2 "
-                    onClick={() => navigate("/admin/naturezas/new")}
+                    onClick={() => navigate("/admin/pessoas/new")}
                   >
-                    <i className="ni ni-book-bookmark"></i> Adicionar
-                    Nova Natureza
+                    <i className="fas fa-clipboard-check"></i> Adicionar
                   </Button>
                 )}
               </CardHeader>
@@ -48,4 +45,4 @@ const NaturezaFatos = () => {
   );
 };
 
-export default NaturezaFatos;
+export default CadastrosGerais;

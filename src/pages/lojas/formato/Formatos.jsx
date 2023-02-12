@@ -26,12 +26,12 @@ const Formatos = () => {
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button
-                    color="primary"
+                    color="success"
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/formatos/new")}
                   >
-                    <i className="fa-solid fa-file-circle-plus"></i> Adicionar
-                    Novo Formato
+                    <i className="fas fa-store-slash"></i> Adicionar
+                    Novo Formato Loja
                   </Button>
                 )}
               </CardHeader>

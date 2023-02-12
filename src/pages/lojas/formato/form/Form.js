@@ -140,7 +140,7 @@ const Forms = (props) => {
               navigate("/admin/formatos");
             }}
           >
-            <i className="fa-solid fa-check"></i> Cancelar
+            <i className="fa-solid fa-times"></i> Cancelar
           </Button>
         </Form>
       )}
