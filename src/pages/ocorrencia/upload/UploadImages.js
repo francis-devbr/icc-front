@@ -71,9 +71,10 @@ const UploadImages = (props) => {
   };
 
   useEffect(() => {
-    FileUploadService.getFiles(props.id).then((response) => {
-      setImageInfos(response.data);
-    });
+     if (props.id)
+       FileUploadService.getFiles(props.id).then((response) => {
+         setImageInfos(response.data);
+       });
   }, []);
   return (
     <div>
