@@ -41,9 +41,7 @@ const Index = (props) => {
                 <CardBody>
                   {/* Chart */}
 
-                  <div className="chart">
-                    <Bar data={chartExample2.data} />
-                  </div>
+                 
                 </CardBody>
               </Card>
             )}
