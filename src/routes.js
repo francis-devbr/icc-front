@@ -8,6 +8,8 @@ import Formatos from "./pages/lojas/formato/Formatos";
 import Formato from "./pages/lojas/formato/Formato";
 import NaturezaFatos from "./pages/parametros/natureza-fato/NaturezaFatos";
 import Natureza from "./pages/parametros/natureza-fato/NaturezaFato";
+import OcorrenciasInterna from "./pages/ocorrencias-internas/OcorrenciasInterna";
+import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInternas";
 
 var routes = [
   {
@@ -120,6 +122,33 @@ var routes = [
     name: "Editar Cadastro de Naturezas Fato",
     icon: "ni ni-folder-17 text-primary",
     element: <Natureza />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/ocorrencias-internas",
+    name: "Ocorrencias Internas",
+    icon: "ni ni-briefcase-24 text-primary",
+    element: <OcorrenciasInternas />,
+    layout: "/admin",
+    showSidebar: true,
+  },
+
+  {
+    path: "/ocorrencias-internas/:id/:acao",
+    name: "Editar Cadastro de Ocorrencias Internas",
+    icon: "ni ni-briefcase-24 text-primary",
+    element: <OcorrenciasInterna />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/ocorrencias-internas/:acao",
+    name: "Editar Cadastro de Ocorrencias Internas",
+    icon: "ni ni-briefcase-24 text-primary",
+    element: <OcorrenciasInterna />,
     layout: "/admin",
     showSidebar: false,
   },
