@@ -8,7 +8,7 @@ import {
 } from "../../../app/api/naturezaFatoApiSlice";
 
 import LoadingPage from "../../../components/LoadingPage";
-import ModalNaturezaFato from "./ModalNaturezaFato";
+
 
 const List = (props) => {
   const [getNaturezas, { isLoading, isSuccess }] = useGetNaturezasMutation();
@@ -35,7 +35,7 @@ const List = (props) => {
 
   return (
     <>
-      <ModalNaturezaFato isShowing={show} setIsShowing={setShow} />
+    
       <Table className="align-items-center table-flush" responsive hover>
         {isLoading && <LoadingPage />}
         {isSuccess && (

@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import HeaderNoInfo from "../../../components/header/HeaderNoInfo";
 import List from "./List";
-import ModalNaturezaFato from "./ModalNaturezaFato";
+
 
 const NaturezaFatos = () => {
   const navigate = useNavigate();

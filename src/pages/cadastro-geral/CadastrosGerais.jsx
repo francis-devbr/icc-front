@@ -11,7 +11,6 @@ import {
   Row,
 } from "reactstrap";
 import HeaderNoInfo from "../../components/header/HeaderNoInfo";
-import List from "./List";
 
 const CadastrosGerais = () => {
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ const CadastrosGerais = () => {
                           <Button
                             color="primary"
                             className="btn mb-2 w-100 mt-2"
-                            onClick={() => navigate("/admin/ocorrencias/new")}
+                            onClick={() => navigate("/admin/lojas")}
                           >
                             <i className="fa-solid fa-eye"></i> Visualizar
                           </Button>
@@ -83,14 +82,13 @@ const CadastrosGerais = () => {
                           <Button
                             color="primary"
                             className="btn mb-2 w-100 mt-2"
-                            onClick={() => navigate("/admin/ocorrencias/new")}
+                            onClick={() => navigate("/admin/formatos")}
                           >
                             <i className="fa-solid fa-eye"></i> Visualizar
                           </Button>
                         </CardBody>
                       </Card>
                     </Col>
-                    
 
                     <Col lg="6" xl="6" className="mt-3">
                       <Card className="card-stats mb-4 mb-xl-0">
@@ -116,7 +114,7 @@ const CadastrosGerais = () => {
                           <Button
                             color="primary"
                             className="btn mb-2 w-100 mt-2"
-                            onClick={() => navigate("/admin/ocorrencias/new")}
+                            onClick={() => navigate("/admin/naturezas")}
                           >
                             <i className="fa-solid fa-eye"></i> Visualizar
                           </Button>
@@ -148,7 +146,7 @@ const CadastrosGerais = () => {
                           <Button
                             color="primary"
                             className="btn mb-2 w-100 mt-2"
-                            onClick={() => navigate("/admin/ocorrencias/new")}
+                            onClick={() => navigate("/admin/pessoas")}
                           >
                             <i className="fa-solid fa-eye"></i> Visualizar
                           </Button>
@@ -156,12 +154,9 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
                   </Row>
-                  
                 )}
               </CardHeader>
-              <CardBody>
-                {/* <List /> */}
-              </CardBody>
+              <CardBody>{/* <List /> */}</CardBody>
             </Card>
           </Col>
         </Row>

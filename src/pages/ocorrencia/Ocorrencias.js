@@ -1,6 +1,14 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
-import { Card, Container, Row, Col, CardHeader, Button } from "reactstrap";
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  CardHeader,
+  Button,
+  CardBody,
+} from "reactstrap";
 
 import HeaderNoInfo from "../../components/header/HeaderNoInfo";
 import List from "./List";
@@ -23,12 +31,15 @@ const Ocorrencias = (props) => {
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/ocorrencias/new")}
                   >
-                    <i className="ni ni-folder-17"></i> Adicionar
-                    Nova Ocorrência
+                    <i className="ni ni-folder-17"></i> Adicionar Nova
+                    Ocorrência
                   </Button>
                 )}
-                <List />
               </CardHeader>
+
+              <CardBody>
+                <List />
+              </CardBody>
             </Card>
           </Col>
         </Row>

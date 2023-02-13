@@ -13,7 +13,6 @@ import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInterna
 import Pessoas from "./pages/pessoas/Pessoas";
 import Pessoa from "./pages/pessoas/Pessoa";
 import CadastrosGerais from "./pages/cadastro-geral/CadastrosGerais";
-import CadastroGeral from "./pages/cadastro-geral/CadastroGeral";
 
 var routes = [
   {
@@ -55,7 +54,7 @@ var routes = [
     icon: "fa-solid fa-store text-primary",
     element: <Lojas />,
     layout: "/admin",
-    showSidebar: true,
+    showSidebar: false,
   },
 
   {
@@ -82,7 +81,7 @@ var routes = [
     icon: "fas fa-store-slash text-primary",
     element: <Formatos />,
     layout: "/admin",
-    showSidebar: true,
+    showSidebar: false,
   },
 
   {
@@ -109,7 +108,7 @@ var routes = [
     icon: "ni ni-book-bookmark text-primary",
     element: <NaturezaFatos />,
     layout: "/admin",
-    showSidebar: true,
+    showSidebar: false,
   },
 
   {
@@ -162,7 +161,7 @@ var routes = [
     icon: "ni ni-circle-08 text-primary",
     element: <Pessoas />,
     layout: "/admin",
-    showSidebar: true,
+    showSidebar: false,
   },
 
   {
@@ -191,22 +190,8 @@ var routes = [
     showSidebar: true,
   },
 
-  {
-    path: "/cadastro-geral/:id/:acao",
-    name: "Editar Cadastro Geral",
-    icon: "fas fa-clipboard-check text-primary",
-    element: <CadastroGeral />,
-    layout: "/admin",
-    showSidebar: false,
-  },
 
-  {
-    path: "/cadastro-geral/:acao",
-    name: "Editar Cadastro Geral",
-    icon: "fas fa-clipboard-check text-primary",
-    element: <CadastroGeral />,
-    layout: "/admin",
-    showSidebar: false,
-  },
+
+
 ];
 export default routes;
