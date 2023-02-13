@@ -36,6 +36,10 @@
   min-height: 147px;
 }
 
+.card-stats-ocorrencia{
+  min-height: 100px;
+}
+
 @keyframes spin-anim {
   0% {
     transform: rotate(0deg);

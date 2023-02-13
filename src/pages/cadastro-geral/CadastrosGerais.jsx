@@ -27,7 +27,7 @@ const CadastrosGerais = () => {
                 {keycloak?.hasResourceRole("manager") && (
                   <Row>
                     <Col lg="6" xl="6">
-                      <Card className="card-stats mb-4 mb-xl-0">
+                      <Card className="card-stats mb-4 mb-xl-0" >
                         <CardBody>
                           <Row>
                             <div className="col">
