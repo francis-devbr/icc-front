@@ -18,7 +18,7 @@ const NaturezaFatos = () => {
 
   return (
     <>
-      <SimpleHeader name="Natureza Fato" parentName="Cadastro Geral" />
+      <SimpleHeader name="Naturezas" parentName="Cadastro Geral" />
       <Container className="mt--6" fluid>
         <Row>
           <Col>

@@ -19,7 +19,7 @@ const Formatos = () => {
 
   return (
     <>
-      <SimpleHeader name="Ocorrencias" parentName="Ocorrencia" />
+      <SimpleHeader name="Formatos" parentName="Cadastro Geral" />
       <Container className="mt--6" fluid>
         <Row>
           <Col>

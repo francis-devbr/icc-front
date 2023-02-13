@@ -1,3 +1,4 @@
+import SimpleHeader from "components/header/SimpleHeader";
 import { useParams } from "react-router-dom";
 import { Card, Container, Row, Col, CardHeader, CardBody } from "reactstrap";
 
@@ -7,7 +8,8 @@ const Loja = () => {
 
   return (
     <>
-      <Container className="mt--7" fluid>
+      <SimpleHeader name="Loja" parentName="Cadastro Geral" />
+      <Container className="mt--6" fluid>
         <Row>
           <Col>
             <Card className="shadow">
