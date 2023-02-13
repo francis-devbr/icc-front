@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useAddNaturezaMutation, useGetNaturezaMutation } from "../../../app/api/naturezaFatoApiSlice";
+import { useAddNaturezaMutation, useGetNaturezaMutation } from "app/api/naturezaFatoApiSlice";
 
-import LoadingPage from "../../../components/LoadingPage";
+import LoadingPage from "components/LoadingPage";
 
 const Forms = (props) => {
   const navigate = useNavigate();

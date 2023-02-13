@@ -1,14 +1,15 @@
+import SimpleHeader from "components/header/SimpleHeader";
 import { useParams } from "react-router-dom";
 import { Card, Container, Row, Col, CardHeader, CardBody } from "reactstrap";
-import HeaderNoInfo from "../../components/header/HeaderNoInfo";
+
 import Forms from "./form/Form";
 
 const Ocorrencia = (props) => {
   const params = useParams();
   return (
     <>
-      <HeaderNoInfo />
-      <Container className="mt--7" fluid>
+      <SimpleHeader name="Ocorrencia" parentName="Ocorrencia" />
+      <Container className="mt--6" fluid>
         <Row>
           <Col>
             <Card className="shadow">

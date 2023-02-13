@@ -1,18 +1,18 @@
-import Index from "./pages/Index";
+import Formato from "pages/cadastros/formato/Formato";
+import Formatos from "pages/cadastros/formato/Formatos";
+import Natureza from "pages/cadastros/natureza-fato/NaturezaFato";
+import NaturezaFatos from "pages/cadastros/natureza-fato/NaturezaFatos";
+import Pessoa from "pages/cadastros/pessoas/Pessoa";
+import Pessoas from "pages/cadastros/pessoas/Pessoas";
+import Loja from "pages/lojas/Loja";
+import Lojas from "pages/lojas/Lojas";
+import Ocorrencia from "pages/ocorrencia/Ocorrencia";
+import Ocorrencias from "pages/ocorrencia/Ocorrencias";
+import OcorrenciasInterna from "pages/ocorrencias-internas/OcorrenciasInterna";
+import OcorrenciasInternas from "pages/ocorrencias-internas/OcorrenciasInternas";
+import Index from "pages/Index";
 
-import Lojas from "./pages/loja/Lojas";
-import Loja from "./pages/loja/Loja";
-import Ocorrencias from "./pages/ocorrencia/Ocorrencias";
-import Ocorrencia from "./pages/ocorrencia/Ocorrencia";
-import Formatos from "./pages/lojas/formato/Formatos";
-import Formato from "./pages/lojas/formato/Formato";
-import NaturezaFatos from "./pages/parametros/natureza-fato/NaturezaFatos";
-import Natureza from "./pages/parametros/natureza-fato/NaturezaFato";
-import OcorrenciasInterna from "./pages/ocorrencias-internas/OcorrenciasInterna";
-import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInternas";
-import Pessoas from "./pages/pessoas/Pessoas";
-import Pessoa from "./pages/pessoas/Pessoa";
-import CadastrosGerais from "./pages/cadastro-geral/CadastrosGerais";
+
 
 var routes = [
   {
@@ -48,14 +48,6 @@ var routes = [
     layout: "/admin",
     showSidebar: false,
   },
-  {
-    path: "/lojas",
-    name: "Lojas",
-    icon: "fa-solid fa-store text-primary",
-    element: <Lojas />,
-    layout: "/admin",
-    showSidebar: false,
-  },
 
   {
     path: "/lojas/:id/:acao",
@@ -76,15 +68,6 @@ var routes = [
   },
 
   {
-    path: "/formatos",
-    name: "Formato Loja",
-    icon: "fas fa-store-slash text-primary",
-    element: <Formatos />,
-    layout: "/admin",
-    showSidebar: false,
-  },
-
-  {
     path: "/formatos/:id/:acao",
     name: "Editar Cadastro de Foramto Loja",
     icon: "fas fa-store-slash text-primary",
@@ -98,15 +81,6 @@ var routes = [
     name: "Editar Cadastro de Formato Loja",
     icon: "fas fa-store-slash text-primary",
     element: <Formato />,
-    layout: "/admin",
-    showSidebar: false,
-  },
-
-  {
-    path: "/naturezas",
-    name: "Natureza Fato",
-    icon: "ni ni-book-bookmark text-primary",
-    element: <NaturezaFatos />,
     layout: "/admin",
     showSidebar: false,
   },
@@ -155,14 +129,6 @@ var routes = [
     layout: "/admin",
     showSidebar: false,
   },
-  {
-    path: "/pessoas",
-    name: "Pessoas",
-    icon: "ni ni-circle-08 text-primary",
-    element: <Pessoas />,
-    layout: "/admin",
-    showSidebar: false,
-  },
 
   {
     path: "/pessoas/:id/:acao",
@@ -182,16 +148,43 @@ var routes = [
     showSidebar: false,
   },
   {
-    path: "/cadastro-geral",
+    collapse: true,
     name: "Cadastro Geral",
     icon: "fas fa-clipboard-check text-primary",
-    element: <CadastrosGerais />,
-    layout: "/admin",
+    state: "cadastrosCollapse",
     showSidebar: true,
+    views: [
+      {
+        path: "/pessoas",
+        name: "Pessoas",
+        miniName: "P",
+        element: <Pessoas />,
+        layout: "/admin",
+      },
+
+      {
+        path: "/naturezas",
+        name: "Natureza Fato",
+        miniName: "N",
+        element: <NaturezaFatos />,
+        layout: "/admin",
+      },
+      {
+        path: "/formatos",
+        name: "Formato Loja",
+        miniName: "F",
+        element: <Formatos />,
+        layout: "/admin",
+      },
+
+      {
+        path: "/lojas",
+        name: "Lojas",
+        miniName: "F",
+        element: <Lojas />,
+        layout: "/admin",
+      },
+    ],
   },
-
-
-
-
 ];
 export default routes;

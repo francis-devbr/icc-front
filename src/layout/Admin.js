@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
 
-import routes from "../routes";
+import routes from "routes";
 
-import AdminNavbar from "../components/navbar/AdminNavbar";
+import AdminNavbar from "components/navbar/AdminNavbar";
 
 import { Flip, ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import SidebarLeft from "../components/sidebarleft/SidebarLeft";
+
+import Sidebar from "components/sidebarleft/Sidebar";
+
 const Admin = () => {
+  const [sidenavOpen, setSidenavOpen] = useState(true);
   const mainContent = useRef(null);
   const location = useLocation();
 
@@ -17,10 +20,16 @@ const Admin = () => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
+
+    console.log(sidenavOpen)
   }, [location]);
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
+      if (prop.collapse) {
+        return getRoutes(prop.views);
+      }
+
       if (prop.layout === "/admin") {
         return (
           <Route
@@ -44,24 +53,52 @@ const Admin = () => {
     return "ICC";
   };
 
+  // toggles collapse between mini sidenav and normal
+  const toggleSidenav = (e) => {
+    if (document.body.classList.contains("g-sidenav-pinned")) {
+      document.body.classList.remove("g-sidenav-pinned");
+      document.body.classList.add("g-sidenav-hidden");
+    } else {
+      document.body.classList.add("g-sidenav-pinned");
+      document.body.classList.remove("g-sidenav-hidden");
+    }
+    setSidenavOpen(!sidenavOpen);
+  };
+
+  const getNavbarTheme = () => {
+    return location.pathname.indexOf("admin/alternative-dashboard") === -1
+      ? "dark"
+      : "light";
+  };
+
   return (
     <>
-      <SidebarLeft
+      <Sidebar
         routes={routes.filter((route) => {
           return route.showSidebar === true;
         })}
+        toggleSidenav={toggleSidenav}
+        sidenavOpen={sidenavOpen}
         logo={{
           innerLink: "/admin/index",
-          imgSrc: require("../assets/img/brand/logo_icc.png"),
+          imgSrc: require("assets/img/brand/logo_icc.png"),
           imgAlt: "...",
         }}
       />
 
       <div className="main-content" ref={mainContent}>
         <ToastContainer transition={Flip} />
-        <AdminNavbar brandText={getBrandText()} />
+        <AdminNavbar
+          theme={getNavbarTheme()}
+          toggleSidenav={toggleSidenav}
+          sidenavOpen={sidenavOpen}
+          brandText={getBrandText()}
+        />
         <Routes>{getRoutes(routes)}</Routes>
       </div>
+      {sidenavOpen ? (
+        <div className="backdrop d-xl-none" onClick={toggleSidenav} />
+      ) : null}
     </>
   );
 };

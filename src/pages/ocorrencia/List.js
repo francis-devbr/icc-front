@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Badge, Button, Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import { useKeycloak } from "@react-keycloak/web";
-import LoadingPage from "../../components/LoadingPage";
+import LoadingPage from "components/LoadingPage";
 
 import { toast } from "react-toastify";
-import { useDeleteOcorrenciaMutation, useGetOcorrenciasMutation } from "../../app/api/ocorrencia/ocorrenciaApiSlice";
+import { useDeleteOcorrenciaMutation, useGetOcorrenciasMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
 
 function List() {
   const { keycloak } = useKeycloak();

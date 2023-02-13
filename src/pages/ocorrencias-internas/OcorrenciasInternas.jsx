@@ -1,4 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
+import SimpleHeader from "components/header/SimpleHeader";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -9,7 +10,7 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import HeaderNoInfo from "../../components/header/HeaderNoInfo";
+
 import List from "./List";
 
 const OcorrenciasInternas = () => {
@@ -18,8 +19,8 @@ const OcorrenciasInternas = () => {
 
   return (
     <>
-      <HeaderNoInfo />
-      <Container className="mt--7" fluid>
+      <SimpleHeader name="Ocorrencia" parentName="Ocorrencia" />
+      <Container className="mt--6" fluid>
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
