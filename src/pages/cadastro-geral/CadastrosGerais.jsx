@@ -21,13 +21,14 @@ const CadastrosGerais = () => {
       <HeaderNoInfo />
       <Container className="mt--7" fluid>
         <Row>
-          <Col lg="6">
-            <Card className="shadow">
-              <CardHeader className="border-0">
+          <Col>
+            <Card className="shadow" style={{ minHeight: "550px" }}>
+              <CardHeader className="border-0"></CardHeader>
+              <CardBody>
                 {keycloak?.hasResourceRole("manager") && (
                   <Row>
-                    <Col lg="6" xl="6">
-                      <Card className="card-stats mb-4 mb-xl-0" >
+                    <Col lg="3" xl="3">
+                      <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
                             <div className="col">
@@ -58,7 +59,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6">
+                    <Col lg="3" xl="3">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -90,7 +91,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6" className="mt-3">
+                    <Col lg="3" xl="3">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -122,7 +123,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6" className="mt-3">
+                    <Col lg="3" xl="3">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -155,8 +156,7 @@ const CadastrosGerais = () => {
                     </Col>
                   </Row>
                 )}
-              </CardHeader>
-              <CardBody>{/* <List /> */}</CardBody>
+              </CardBody>
             </Card>
           </Col>
         </Row>

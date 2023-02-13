@@ -24,7 +24,7 @@ const NaturezaFatos = () => {
       <Container className="mt--7" fluid>
         <Row>
           <Col>
-            <Card className="shadow">
+            <Card className="shadow" >
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button

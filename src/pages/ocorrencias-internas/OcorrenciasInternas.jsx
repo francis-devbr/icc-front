@@ -22,7 +22,7 @@ const OcorrenciasInternas = () => {
       <Container className="mt--7" fluid>
         <Row>
           <Col>
-            <Card className="shadow">
+            <Card className="shadow" style={{ minHeight: "550px" }}>
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button
@@ -30,8 +30,8 @@ const OcorrenciasInternas = () => {
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/ocorrencias-internas/new")}
                   >
-                    <i className="ni ni-briefcase-24"></i> Adicionar
-                    Nova Ocorrência
+                    <i className="ni ni-briefcase-24"></i> Adicionar Nova
+                    Ocorrência
                   </Button>
                 )}
               </CardHeader>

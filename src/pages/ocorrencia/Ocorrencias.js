@@ -23,7 +23,7 @@ const Ocorrencias = (props) => {
       <Container className="mt--7" fluid>
         <Row>
           <Col>
-            <Card className="shadow">
+            <Card className="shadow" style={{ minHeight: "550px" }}>
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Button
