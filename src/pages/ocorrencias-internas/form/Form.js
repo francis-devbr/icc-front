@@ -1,7 +1,7 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { useAddNaturezaMutation, useGetNaturezaMutation } from "app/api/naturezaFatoApiSlice";
 
@@ -83,12 +83,7 @@ const Forms = (props) => {
         pesquisa
       };
 
-      await toast
-        .promise(addNatureza(data), {
-          pending: "Salvando...",
-          success: "Ocorrência Interna Salva...",
-          error: "Erro ao Salvar",
-        })
+      await addNatureza(data)
         .then((r) => {
           setOcorrencia((prevState) => ({
             ...prevState,
@@ -98,7 +93,7 @@ const Forms = (props) => {
         });
     } else {
       errorMsg = "Please fill out all the fields.";
-      toast(errorMsg);
+      
     }
   };
 

@@ -1,7 +1,7 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import {
   useAddFormatoMutation,
@@ -54,12 +54,7 @@ const Forms = (props) => {
         nome,
       };
 
-      await toast
-        .promise(addFormato(data), {
-          pending: "Salvando...",
-          success: "Formato Salvo...",
-          error: "Erro ao Salvar",
-        })
+      await addFormato(data)
         .then((r) => {
           setFormato((prevState) => ({
             ...prevState,
@@ -69,7 +64,7 @@ const Forms = (props) => {
         });
     } else {
       errorMsg = "Please fill out all the fields.";
-      toast(errorMsg);
+     
     }
   };
 

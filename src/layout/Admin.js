@@ -5,10 +5,6 @@ import routes from "routes";
 
 import AdminNavbar from "components/navbar/AdminNavbar";
 
-import { Flip, ToastContainer } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import Sidebar from "components/sidebarleft/Sidebar";
 
 const Admin = () => {
@@ -87,7 +83,6 @@ const Admin = () => {
       />
 
       <div className="main-content" ref={mainContent}>
-        <ToastContainer transition={Flip} />
         <AdminNavbar
           theme={getNavbarTheme()}
           toggleSidenav={toggleSidenav}

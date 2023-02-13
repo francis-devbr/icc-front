@@ -1,5 +1,6 @@
 import { useKeycloak } from "@react-keycloak/web";
 import SimpleHeader from "components/header/SimpleHeader";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   Row,
 } from "reactstrap";
 import List from "./List";
+
 
 const NaturezaFatos = () => {
   const navigate = useNavigate();

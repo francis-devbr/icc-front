@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { Table } from "reactstrap";
 import {
   useDeleteFormatoMutation,
@@ -9,7 +8,6 @@ import {
 import LoadingPage from "components/LoadingPage";
 
 const List = (props) => {
-
   const [getFormatos, { isLoading, isSuccess }] = useGetFormatosMutation();
 
   const [formatos, setFormatos] = useState(null);
@@ -21,15 +19,9 @@ const List = (props) => {
   }, []);
 
   async function remove(id) {
-    await toast
-      .promise(deleteFormato(id), {
-        pending: "Apagando...",
-        success: "Registro Excluido...",
-        error: "Erro ao Excluir",
-      })
-      .then(() =>
-        setFormatos((formatos) => formatos.filter((x) => x.id !== id))
-      );
+    await deleteFormato(id).then(() =>
+      setFormatos((formatos) => formatos.filter((x) => x.id !== id))
+    );
   }
 
   return (

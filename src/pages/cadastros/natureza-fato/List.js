@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { Table } from "reactstrap";
 import {
   useDeleteNaturezaMutation,
@@ -8,7 +8,7 @@ import {
 } from "app/api/naturezaFatoApiSlice";
 
 import LoadingPage from "components/LoadingPage";
-
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const List = (props) => {
   const [getNaturezas, { isLoading, isSuccess }] = useGetNaturezasMutation();
@@ -21,21 +21,39 @@ const List = (props) => {
     getNaturezas().then((x) => setNaturezas(x.data));
   }, []);
 
+  const [alert, setAlert] = useState(null);
+
+  const removeAlert = (id) => {
+    setAlert(
+      <ReactBSAlert
+        danger
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Deseja Excluir o Registro?!"
+        onConfirm={() => setAlert(null)}
+        onCancel={() => remove(id)}
+        showCancel
+        confirmBtnBsStyle="secondary"
+        confirmBtnText="Cancelar"
+        cancelBtnBsStyle="danger"
+        cancelBtnText="Sim, apague isso!"
+        btnSize=""
+      >
+        Você não será capaz de reverter isso!
+      </ReactBSAlert>
+    );
+  };
+
   async function remove(id) {
-    await toast
-      .promise(deleteNatureza(id), {
-        pending: "Apagando...",
-        success: "Registro Excluido...",
-        error: "Erro ao Excluir",
-      })
-      .then(() =>
-        setNaturezas((naturezas) => naturezas.filter((x) => x.id !== id))
-      );
+    await deleteNatureza(id).then(() =>
+      setNaturezas((naturezas) => naturezas.filter((x) => x.id !== id))
+    );
+
+    setAlert(null);
   }
 
   return (
     <>
-    
+      {alert}
       <Table className="align-items-center table-flush" responsive hover>
         {isLoading && <LoadingPage />}
         {isSuccess && (
@@ -60,7 +78,7 @@ const List = (props) => {
                       <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
                     </Link>
                     <button
-                      onClick={() => remove(natureza.id)}
+                      onClick={() => removeAlert(natureza.id)}
                       className="btn btn-link px-0"
                     >
                       <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>

@@ -4,11 +4,7 @@ import { useGetNaturezaMutation } from "app/api/naturezaFatoApiSlice";
 import LoadingPage from "components/LoadingPage";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-
-
-
 
 const Forms = (props) => {
   const navigate = useNavigate();
@@ -19,7 +15,7 @@ const Forms = (props) => {
 
   const [pessoa, setPessoa] = useState({ id: null, nome: "" });
 
-  const {nome, cpf,statusPessoa } = pessoa;
+  const { nome, cpf, statusPessoa } = pessoa;
 
   useEffect(() => {
     if (props?.id) {
@@ -53,25 +49,18 @@ const Forms = (props) => {
       const data = {
         nome,
         cpf,
-        statusPessoa       
+        statusPessoa,
       };
 
-      await toast
-        .promise(addNatureza(data), {
-          pending: "Salvando...",
-          success: "Ocorrência Interna Salva...",
-          error: "Erro ao Salvar",
-        })
-        .then((r) => {
-          setPessoa((prevState) => ({
-            ...prevState,
-            id: r.data.id,
-          }));
-          navigate(`/admin/naturezas/${r.data.id}/view`);
-        });
+      await addNatureza(data).then((r) => {
+        setPessoa((prevState) => ({
+          ...prevState,
+          id: r.data.id,
+        }));
+        navigate(`/admin/naturezas/${r.data.id}/view`);
+      });
     } else {
       errorMsg = "Please fill out all the fields.";
-      toast(errorMsg);
     }
   };
 
@@ -85,12 +74,12 @@ const Forms = (props) => {
               <FormGroup>
                 <Label for="nomeLoja">Nome Completo</Label>
                 <Input
-                id="nome"
-                name="nome"
-                type="text"
-                placeholder="Digite o nome completo"
-                value={nome}
-                onChange={handleInputChange}
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  placeholder="Digite o nome completo"
+                  value={nome}
+                  onChange={handleInputChange}
                 />
               </FormGroup>
             </Col>
@@ -98,12 +87,12 @@ const Forms = (props) => {
               <FormGroup>
                 <Label for="nomeLoja">CPF</Label>
                 <Input
-                id="cpf"
-                name="cpf"
-                type="text"
-                placeholder="Ex: 000.000.000-00"
-                value={cpf}
-                onChange={handleInputChange}
+                  id="cpf"
+                  name="cpf"
+                  type="text"
+                  placeholder="Ex: 000.000.000-00"
+                  value={cpf}
+                  onChange={handleInputChange}
                 />
               </FormGroup>
             </Col>
@@ -117,17 +106,15 @@ const Forms = (props) => {
                   value={statusPessoa}
                   onChange={handleInputChange}
                 >
-                 <option>Selecione a opção</option>
-                 <option>Fornecedor</option>
-                 <option>Funcionário</option>
-                 <option>Ex Funcionário</option>
-                 <option>Colaborador</option>
-                 <option>Externo</option>
-                    
+                  <option>Selecione a opção</option>
+                  <option>Fornecedor</option>
+                  <option>Funcionário</option>
+                  <option>Ex Funcionário</option>
+                  <option>Colaborador</option>
+                  <option>Externo</option>
                 </Input>
               </FormGroup>
             </Col>
-          
           </Row>
           <hr />
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { Table } from "reactstrap";
 import { useDeleteNaturezaMutation, useGetNaturezasMutation } from "../../app/api/naturezaFatoApiSlice";
 
@@ -20,12 +20,7 @@ const List = (props) => {
   }, []);
 
   async function remove(id) {
-    await toast
-      .promise(deleteNatureza(id), {
-        pending: "Apagando...",
-        success: "Ocorrência Excluida...",
-        error: "Erro ao Excluir",
-      })
+    await deleteNatureza(id)
       .then(() =>
         setNaturezas((naturezas) => naturezas.filter((x) => x.id !== id))
       );

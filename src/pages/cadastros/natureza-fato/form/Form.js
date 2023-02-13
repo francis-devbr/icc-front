@@ -1,9 +1,12 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useAddNaturezaMutation, useGetNaturezaMutation } from "app/api/naturezaFatoApiSlice";
+import {
+  useAddNaturezaMutation,
+  useGetNaturezaMutation,
+} from "app/api/naturezaFatoApiSlice";
 
 import LoadingPage from "components/LoadingPage";
 
@@ -17,6 +20,36 @@ const Forms = (props) => {
   const [natureza, setNatureza] = useState({ id: null, nome: "" });
 
   const { id, nome } = natureza;
+
+  const [alert, setAlert] = useState(null);
+
+  const errorAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        warning
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Erro ao registrar!"
+        onConfirm={() => setAlert(null)}
+        onCancel={() => setAlert(null)}
+      >
+        Erro ao tentar inserir o registro
+      </ReactBSAlert>
+    );
+  };
+
+  const successAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        success
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Registro Salvo!"
+        onConfirm={() => setAlert(null)}
+        onCancel={() => setAlert(null)}
+        timeout={2000}
+        showConfirm={false}
+      ></ReactBSAlert>
+    );
+  };
 
   useEffect(() => {
     if (props?.id) {
@@ -38,41 +71,26 @@ const Forms = (props) => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    const values = [nome];
-    let errorMsg = "";
 
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
-    });
+    await addNatureza(natureza)
+      .then((r) => {
+        setNatureza((prevState) => ({
+          ...prevState,
+          id: r.data.id,
+        }));
 
-    if (allFieldsFilled) {
-      const data = {
-        id,
-        nome,
-      };
-
-      await toast
-        .promise(addNatureza(data), {
-          pending: "Salvando...",
-          success: "Natureza Salvo...",
-          error: "Erro ao Salvar",
-        })
-        .then((r) => {
-          setNatureza((prevState) => ({
-            ...prevState,
-            id: r.data.id,
-          }));
-          navigate(`/admin/naturezas/${r.data.id}/view`);
-        });
-    } else {
-      errorMsg = "Please fill out all the fields.";
-      toast(errorMsg);
-    }
+        successAlert();
+        navigate(`/admin/naturezas/${r.data.id}/view`);
+      })
+      .catch((e) => {
+        console.log(e);
+        errorAlert();
+      });
   };
 
   return (
     <>
+      {alert}
       {isLoading && <LoadingPage />}
       {!isLoading && (
         <Form role="form">

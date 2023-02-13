@@ -1,18 +1,10 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
 import parametros from "app/data/params.json";
-import {
-  Button,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from "reactstrap";
+import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { useEffect, useState } from "react";
 import { useGetNaturezasMutation } from "app/api/naturezaFatoApiSlice";
-import { toast } from "react-toastify";
+
 import {
   useAddOcorrenciaMutation,
   useGetOcorrenciaMutation,
@@ -67,19 +59,13 @@ const Forms = (props) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    await toast
-      .promise(addOcorrencia(ocorrencia), {
-        pending: "Salvando...",
-        success: "Ocorrencia Salva...",
-        error: "Erro ao Salvar",
-      })
-      .then((r) => {
-        setOcorrencia((prevState) => ({
-          ...prevState,
-          id: r.data.id,
-        }));
-        navigate(`/admin/ocorrencias/${r.data.id}/view`);
-      });
+    await addOcorrencia(ocorrencia).then((r) => {
+      setOcorrencia((prevState) => ({
+        ...prevState,
+        id: r.data.id,
+      }));
+      navigate(`/admin/ocorrencias/${r.data.id}/view`);
+    });
   };
   useEffect(() => {
     if (props?.id) {
