@@ -22,7 +22,6 @@ import {
 
 import LoadingPage from "components/LoadingPage";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import { dataTable } from "variables/general";
 
 const pagination = paginationFactory({
   page: 1,
