@@ -1,20 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Container,
-  Row,
-  Table,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import {
   useDeleteNaturezaMutation,
   useGetNaturezasMutation,
@@ -22,6 +12,7 @@ import {
 
 import LoadingPage from "components/LoadingPage";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const pagination = paginationFactory({
   page: 1,
@@ -31,7 +22,6 @@ const pagination = paginationFactory({
   sizePerPageRenderer: ({ onSizePerPageChange }) => (
     <div className="dataTables_length" id="datatable-basic_length">
       <label>
-       
         {
           <select
             name="datatable-basic_length"
@@ -57,7 +47,7 @@ const List = () => {
   const [naturezas, setNaturezas] = useState([]);
   const [show, setShow] = useState(false);
   const componentRef = useRef(null);
-
+  const navigate = useNavigate();
   const [getNaturezas, { isLoading, isSuccess }] = useGetNaturezasMutation();
   const [deleteNatureza] = useDeleteNaturezaMutation();
 
@@ -96,18 +86,41 @@ const List = () => {
   function actionFormatter(cell, row, rowIndex, formatExtraData) {
     return (
       <>
-        <Link to={`/admin/naturezas/${row.id}/view`}>
-          <i className="fa-solid fa-eye text-dark icones-acao"></i>
-        </Link>
-        <Link to={`/admin/naturezas/${row.id}/edit`}>
-          <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
-        </Link>
-        <button
-          onClick={() => removeAlert(row.id)}
-          
+        <Button
+          className="btn-icon"
+          color="success"
+          type="button"
+          size="sm"
+          onClick={() => navigate(`/admin/naturezas/${row.id}/view`)}
         >
-          <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
-        </button>
+          <span className="btn-inner--icon">
+            <i className="fa-solid fa-eye" />
+          </span>
+        </Button>
+
+        <Button
+          className="btn-icon"
+          color="primary"
+          type="button"
+          size="sm"
+          onClick={() => navigate(`/admin/naturezas/${row.id}/edit`)}
+        >
+          <span className="btn-inner--icon">
+            <i className="fa-solid fa-pen-to-square" />
+          </span>
+        </Button>
+
+        <Button
+          className="btn-icon"
+          color="danger"
+          type="button"
+          size="sm"
+          onClick={() => removeAlert(row.id)}
+        >
+          <span className="btn-inner--icon">
+            <i className="fa-solid fa-trash-alt" />
+          </span>
+        </Button>
       </>
     );
   }
