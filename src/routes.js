@@ -180,7 +180,7 @@ var routes = [
       {
         path: "/lojas",
         name: "Lojas",
-        miniName: "F",
+        miniName: "L",
         element: <Lojas />,
         layout: "/admin",
       },

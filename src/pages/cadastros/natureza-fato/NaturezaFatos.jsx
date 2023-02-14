@@ -13,10 +13,8 @@ import {
 } from "reactstrap";
 import List from "./List";
 
-
 const NaturezaFatos = () => {
   const navigate = useNavigate();
-  const { keycloak } = useKeycloak();
 
   return (
     <>
@@ -25,17 +23,18 @@ const NaturezaFatos = () => {
         <Row>
           <Col>
             <Card className="shadow">
-              <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/naturezas/new")}
-                  >
-                    <i className="ni ni-book-bookmark"></i> Adicionar Nova
-                    Natureza
-                  </Button>
-                )}
+              <CardHeader>
+                <Row className="align-items-center">
+                  <Col className="text-left" xs="12">
+                    <Button
+                      className="btn-neutral"
+                      color="default"
+                      onClick={() => navigate("/admin/naturezas/new")}
+                    >
+                      <i className="ni ni-book-bookmark"></i> Adicionar
+                    </Button>
+                  </Col>
+                </Row>
               </CardHeader>
               <CardBody>
                 <List />
