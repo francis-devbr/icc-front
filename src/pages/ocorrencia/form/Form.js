@@ -1,28 +1,15 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
-import ReactDatetime from "react-datetime";
-import parametros from "../../../app/data/params.json";
-import {
-  Button,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  InputGroup,
-  InputGroupText,
-  Label,
-  Row,
-} from "reactstrap";
+import parametros from "app/data/params.json";
+import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { useEffect, useState } from "react";
-import { useGetNaturezasMutation } from "../../../app/api/naturezaFatoApiSlice";
-import { toast } from "react-toastify";
+import { useGetNaturezasMutation } from "app/api/naturezaFatoApiSlice";
+
 import {
   useAddOcorrenciaMutation,
   useGetOcorrenciaMutation,
-} from "../../../app/api/ocorrencia/ocorrenciaApiSlice";
-import UploadImages from "../upload/UploadImages";
-import UploadVideos from "../upload/UploadVideos";
-import LoadingPage from "../../../components/LoadingPage";
+} from "app/api/ocorrencia/ocorrenciaApiSlice";
+import LoadingPage from "components/LoadingPage";
 
 const Forms = (props) => {
   const navigate = useNavigate();
@@ -72,19 +59,13 @@ const Forms = (props) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    await toast
-      .promise(addOcorrencia(ocorrencia), {
-        pending: "Salvando...",
-        success: "Ocorrencia Salva...",
-        error: "Erro ao Salvar",
-      })
-      .then((r) => {
-        setOcorrencia((prevState) => ({
-          ...prevState,
-          id: r.data.id,
-        }));
-        navigate(`/admin/ocorrencias/${r.data.id}/view`);
-      });
+    await addOcorrencia(ocorrencia).then((r) => {
+      setOcorrencia((prevState) => ({
+        ...prevState,
+        id: r.data.id,
+      }));
+      navigate(`/admin/ocorrencias/${r.data.id}/view`);
+    });
   };
   useEffect(() => {
     if (props?.id) {

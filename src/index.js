@@ -1,17 +1,25 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.min.css";
+import reportWebVitals from "reportWebVitals";
 
-import "./index.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./assets/css/argon-dashboard-react.css";
-import "./assets/plugins/nucleo/css/nucleo.css";
-import App from "./App";
+
+import "assets/vendor/nucleo/css/nucleo.css";
+
+import "assets/scss/argon-dashboard-pro-react.scss?v1.2.1";
+
+import "index.css";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+import "sweetalert2/dist/sweetalert2.min.css";
+
+import App from "App";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store } from "app/store";
 
 
 const container = document.getElementById("root");

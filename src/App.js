@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import PrivateRoute from "./layout/PrivateRoute";
+import PrivateRoute from "layout/PrivateRoute";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import keycloak from "./Keycloak";
+import keycloak from "Keycloak";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AdminLayout from "./layout/Admin";
-import SplashScreen from "./components/SplashScreen";
+import AdminLayout from "layout/Admin";
+import SplashScreen from "components/SplashScreen";
 function App() {
   const [keycloakReady, setKeycloakReady] = useState(false);
 
