@@ -43,14 +43,16 @@ const Forms = (props) => {
         success
         style={{ display: "block", marginTop: "-100px" }}
         title="Registro Salvo!"
-        onConfirm={() => setAlert(null)}
+        onConfirm={() => {
+          setAlert(null);
+          navigate(`/admin/naturezas`);
+        }}
         onCancel={() => setAlert(null)}
         timeout={2000}
         showConfirm={false}
       ></ReactBSAlert>
     );
   };
-  
 
   useEffect(() => {
     if (props?.id) {
@@ -81,7 +83,7 @@ const Forms = (props) => {
         }));
 
         successAlert();
-        navigate(`/admin/naturezas`);
+        //navigate(`/admin/naturezas`);
       })
       .catch((e) => {
         console.log(e);
