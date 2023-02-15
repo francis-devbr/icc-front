@@ -13,6 +13,8 @@ import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInterna
 import Pessoas from "./pages/pessoas/Pessoas";
 import Pessoa from "./pages/pessoas/Pessoa";
 import CadastrosGerais from "./pages/cadastro-geral/CadastrosGerais";
+import Delegacia from "./pages/delegacias/Delegacia";
+import Delegacias from "./pages/delegacias/Delegacias";
 
 var routes = [
   {
@@ -178,6 +180,31 @@ var routes = [
     name: "Editar Cadastro de Pessoas",
     icon: "ni ni-circle-08 text-primary",
     element: <Pessoa />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/delegacias",
+    name: "Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacias />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/delegacias/:id/:acao",
+    name: "Editar Cadastro de Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacia />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/delegacias/:acao",
+    name: "Editar Cadastro de Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacia />,
     layout: "/admin",
     showSidebar: false,
   },

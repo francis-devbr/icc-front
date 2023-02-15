@@ -21,12 +21,12 @@ const CadastrosGerais = () => {
       <HeaderNoInfo />
       <Container className="mt--7" fluid>
         <Row>
-          <Col lg="6">
+          <Col lg="9">
             <Card className="shadow">
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <Row>
-                    <Col lg="6" xl="6">
+                    <Col lg="6" xl="4">
                       <Card className="card-stats mb-4 mb-xl-0" >
                         <CardBody>
                           <Row>
@@ -58,7 +58,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6">
+                    <Col lg="6" xl="4">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -90,7 +90,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6" className="mt-3">
+                    <Col lg="6" xl="4">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -122,7 +122,7 @@ const CadastrosGerais = () => {
                       </Card>
                     </Col>
 
-                    <Col lg="6" xl="6" className="mt-3">
+                    <Col lg="6" xl="4" className="mt-3">
                       <Card className="card-stats mb-4 mb-xl-0">
                         <CardBody>
                           <Row>
@@ -147,6 +147,37 @@ const CadastrosGerais = () => {
                             color="primary"
                             className="btn mb-2 w-100 mt-2"
                             onClick={() => navigate("/admin/pessoas")}
+                          >
+                            <i className="fa-solid fa-eye"></i> Visualizar
+                          </Button>
+                        </CardBody>
+                      </Card>
+                    </Col>
+                    <Col lg="6" xl="4" className="mt-3">
+                      <Card className="card-stats mb-4 mb-xl-0">
+                        <CardBody>
+                          <Row>
+                            <div className="col">
+                              <CardTitle
+                                tag="h5"
+                                className="text-uppercase text-muted mb-0"
+                              >
+                                Delegacias
+                              </CardTitle>
+                              <span className="h2 font-weight-bold mb-0">
+                                113
+                              </span>
+                            </div>
+                            <Col className="col-auto">
+                              <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-user-secret"></i>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Button
+                            color="primary"
+                            className="btn mb-2 w-100 mt-2"
+                            onClick={() => navigate("/admin/delegacias")}
                           >
                             <i className="fa-solid fa-eye"></i> Visualizar
                           </Button>

@@ -63,9 +63,9 @@ const List = (props) => {
                   </Link>
                   <button
                     onClick={() => remove(natureza.id)}
-                    className="btn btn-link px-0"
+                    className="btn-delete p-0"
                   >
-                     <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
+                     <i className="fa-solid fa-trash-alt text-danger mt-0 pt-0 icones-acao"></i>
                   </button>
                 </td>
               </tr>

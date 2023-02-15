@@ -58,7 +58,7 @@ const List = (props) => {
                   </Link>
                   <button
                     onClick={() => remove(formato.id)}
-                    className="btn btn-link px-0"
+                    className="btn-delete p-0"
                   >
                     <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
                   </button>
