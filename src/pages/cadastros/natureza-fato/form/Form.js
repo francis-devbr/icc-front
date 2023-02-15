@@ -50,6 +50,7 @@ const Forms = (props) => {
       ></ReactBSAlert>
     );
   };
+  
 
   useEffect(() => {
     if (props?.id) {
@@ -80,7 +81,7 @@ const Forms = (props) => {
         }));
 
         successAlert();
-        navigate(`/admin/naturezas/${r.data.id}/view`);
+        navigate(`/admin/naturezas`);
       })
       .catch((e) => {
         console.log(e);
