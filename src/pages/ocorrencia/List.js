@@ -71,9 +71,9 @@ function List() {
                   </Link>
                   <Button
                     onClick={() => remove(ocorrencia.id)}
-                    className="btn btn-sm btn-danger btn-delete-user"
+                    className="btn-delete p-0"
                   >
-                    <span>Delete</span>
+                     <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
                   </Button>
                 </td>
               </tr>

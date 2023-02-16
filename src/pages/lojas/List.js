@@ -53,7 +53,11 @@ function List() {
                       <Link to={`/admin/lojas/${loja.id}/edit`}>
                         <i className="fa-solid fa-pen-to-square text-primary icones-acao"></i>
                       </Link>
-                      <i className="fa-solid fa-trash-can text-danger icones-acao"></i>
+                      <button
+                        className="btn btn-delete p-0"
+                      >
+                        <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
+                      </button>
                     </>
                   )}
                 </td>

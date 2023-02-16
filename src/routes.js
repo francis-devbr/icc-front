@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+import Index from "./pages/Index";
+
+import Lojas from "./pages/loja/Lojas";
+import Loja from "./pages/loja/Loja";
+import Ocorrencias from "./pages/ocorrencia/Ocorrencias";
+import Ocorrencia from "./pages/ocorrencia/Ocorrencia";
+import Formatos from "./pages/lojas/formato/Formatos";
+import Formato from "./pages/lojas/formato/Formato";
+import NaturezaFatos from "./pages/parametros/natureza-fato/NaturezaFatos";
+import Natureza from "./pages/parametros/natureza-fato/NaturezaFato";
+import OcorrenciasInterna from "./pages/ocorrencias-internas/OcorrenciasInterna";
+import OcorrenciasInternas from "./pages/ocorrencias-internas/OcorrenciasInternas";
+import Pessoas from "./pages/pessoas/Pessoas";
+import Pessoa from "./pages/pessoas/Pessoa";
+import CadastrosGerais from "./pages/cadastro-geral/CadastrosGerais";
+import Delegacia from "./pages/delegacias/Delegacia";
+import Delegacias from "./pages/delegacias/Delegacias";
+=======
 import Formato from "pages/cadastros/formato/Formato";
 import Formatos from "pages/cadastros/formato/Formatos";
 import Natureza from "pages/cadastros/natureza-fato/NaturezaFato";
@@ -13,6 +32,7 @@ import OcorrenciasInternas from "pages/ocorrencias-internas/OcorrenciasInternas"
 import Index from "pages/Index";
 
 
+>>>>>>> 29202755c9951ec828c5eb724a2eea2266ada191
 
 var routes = [
   {
@@ -148,7 +168,36 @@ var routes = [
     showSidebar: false,
   },
   {
+<<<<<<< HEAD
+    path: "/delegacias",
+    name: "Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacias />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/delegacias/:id/:acao",
+    name: "Editar Cadastro de Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacia />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+
+  {
+    path: "/delegacias/:acao",
+    name: "Editar Cadastro de Delegacias",
+    icon: "fas fa-user-secret text-primary",
+    element: <Delegacia />,
+    layout: "/admin",
+    showSidebar: false,
+  },
+  {
+    path: "/cadastro-geral",
+=======
     collapse: true,
+>>>>>>> 29202755c9951ec828c5eb724a2eea2266ada191
     name: "Cadastro Geral",
     icon: "fas fa-clipboard-check text-primary",
     state: "cadastrosCollapse",
