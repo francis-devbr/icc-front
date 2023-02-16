@@ -1,4 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
+import SimpleHeader from "components/header/SimpleHeader";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -9,7 +10,6 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import HeaderNoInfo from "../../components/header/HeaderNoInfo";
 import List from "./List";
 
 const Delegacias = () => {
@@ -18,7 +18,7 @@ const Delegacias = () => {
 
   return (
     <>
-      <HeaderNoInfo />
+      <SimpleHeader />
       <Container className="mt--7" fluid>
         <Row>
           <Col>
@@ -30,8 +30,8 @@ const Delegacias = () => {
                     className="btn mb-2 "
                     onClick={() => navigate("/admin/delegacias/new")}
                   >
-                    <i className="fas fa-user-secret"></i> Adicionar
-                    Nova Delegacia
+                    <i className="fas fa-user-secret"></i> Adicionar Nova
+                    Delegacia
                   </Button>
                 )}
               </CardHeader>

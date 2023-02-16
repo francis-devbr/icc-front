@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { Table } from "reactstrap";
-import { useDeleteNaturezaMutation, useGetNaturezasMutation } from "../../app/api/naturezaFatoApiSlice";
+import { useDeleteNaturezaMutation, useGetNaturezasMutation } from "../../../app/api/naturezaFatoApiSlice";
 
 
-import LoadingPage from "../../components/LoadingPage";
+import LoadingPage from "../../../components/LoadingPage";
 
 const List = (props) => {
 
@@ -20,12 +19,7 @@ const List = (props) => {
   }, []);
 
   async function remove(id) {
-    await toast
-      .promise(deleteNatureza(id), {
-        pending: "Apagando...",
-        success: "Ocorrência Excluida...",
-        error: "Erro ao Excluir",
-      })
+  deleteNatureza(id)
       .then(() =>
         setNaturezas((naturezas) => naturezas.filter((x) => x.id !== id))
       );
@@ -63,7 +57,7 @@ const List = (props) => {
                   </Link>
                   <button
                     onClick={() => remove(natureza.id)}
-                    className="btn btn-delete p-0"
+                    className="btn-delete p-0"
                   >
                      <i className="fa-solid fa-trash-alt text-danger icones-acao"></i>
                   </button>

@@ -1,6 +1,6 @@
+import SimpleHeader from "components/header/SimpleHeader";
 import { useParams } from "react-router-dom";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
-import HeaderNoInfo from "../../components/header/HeaderNoInfo";
 import Forms from "./form/Form";
 
 const Delegacia = () => {
@@ -8,7 +8,7 @@ const Delegacia = () => {
 
   return (
     <>
-      <HeaderNoInfo />
+      <SimpleHeader />
 
       <Container className="mt--7" fluid>
         <Row>
