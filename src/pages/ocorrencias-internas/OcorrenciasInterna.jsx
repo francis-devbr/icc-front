@@ -14,7 +14,15 @@ const OcorrenciasInterna = () => {
         <Row>
           <Col>
             <Card className="shadow">
-              <CardHeader className="border-0"></CardHeader>
+              <CardHeader>
+                <h3 className="mb-0">
+                  {params.acao === "new"
+                    ? "Novo registro"
+                    : params.acao === "view"
+                    ? `Ocorrencia Interna #${params.id}`
+                    : `Editar Ocorrencia Interna #${params.id}`}
+                </h3>
+              </CardHeader>
               <CardBody>
                 <Forms acao={params.acao} id={params.id} />
               </CardBody>

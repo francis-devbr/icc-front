@@ -30,7 +30,7 @@ const Ocorrencias = (props) => {
                   color="default"
                   onClick={() => navigate("/admin/ocorrencias/new")}
                 >
-                  <i className="ni ni-folder-17"></i> Adicionar Nova Ocorrência
+                  <i className="ni ni-folder-17"></i> Adicionar
                 </Button>
               </CardHeader>
 

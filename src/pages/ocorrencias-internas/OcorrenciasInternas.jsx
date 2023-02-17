@@ -19,22 +19,19 @@ const OcorrenciasInternas = () => {
 
   return (
     <>
-      <SimpleHeader name="Ocorrencia" parentName="Ocorrencia" />
+      <SimpleHeader name="Ocorrencias" parentName="Ocorrencia Interna" />
       <Container className="mt--6" fluid>
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
-              <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/ocorrencias-internas/new")}
-                  >
-                    <i className="ni ni-briefcase-24"></i> Adicionar Nova
-                    Ocorrência
-                  </Button>
-                )}
+            <CardHeader className="border-0">
+                <Button
+                  className="btn-neutral"
+                  color="default"
+                  onClick={() => navigate("/admin/ocorrencias-internas/new")}
+                >
+                  <i className="ni ni-folder-17"></i> Adicionar
+                </Button>
               </CardHeader>
               <CardBody>
                 <List />
