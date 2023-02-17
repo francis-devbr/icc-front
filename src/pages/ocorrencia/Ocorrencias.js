@@ -25,16 +25,13 @@ const Ocorrencias = (props) => {
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
               <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/ocorrencias/new")}
-                  >
-                    <i className="ni ni-folder-17"></i> Adicionar Nova
-                    Ocorrência
-                  </Button>
-                )}
+                <Button
+                  className="btn-neutral"
+                  color="default"
+                  onClick={() => navigate("/admin/ocorrencias/new")}
+                >
+                  <i className="ni ni-folder-17"></i> Adicionar Nova Ocorrência
+                </Button>
               </CardHeader>
 
               <CardBody>

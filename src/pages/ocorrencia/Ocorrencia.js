@@ -13,7 +13,15 @@ const Ocorrencia = (props) => {
         <Row>
           <Col>
             <Card className="shadow">
-              <CardHeader className="border-0"></CardHeader>
+              <CardHeader>
+                <h3 className="mb-0">
+                  {params.acao === "new"
+                    ? "Novo registro"
+                    : params.acao === "view"
+                    ? `Ocorrencia #${params.id}`
+                    : `Editar Ocorrencia #${params.id}`}
+                </h3>
+              </CardHeader>
               <CardBody>
                 <Forms acao={params.acao} id={params.id} />
               </CardBody>
