@@ -43,7 +43,7 @@ const Forms = (props) => {
     responsavel: "",
     inquerito_policial: "",
     delegacia: "",
-    status: "",
+    status: "aberto",
     loja: null,
     observacao: "",
   });
@@ -57,6 +57,7 @@ const Forms = (props) => {
     delegacia,
     loja,
     observacao,
+    status,
   } = ocorrencia;
 
   const errorAlert = () => {
@@ -284,6 +285,8 @@ const Forms = (props) => {
                 id="status"
                 name="status"
                 type="select"
+                defaultValue={status}
+                required
               >
                 <option></option>
                 {parametros.ocorrencia.status?.map((f) => (
