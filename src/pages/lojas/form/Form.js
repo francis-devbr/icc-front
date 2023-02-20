@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-
+import InputMask from "react-input-mask";
 import {
   Button,
   Col,
@@ -49,7 +49,7 @@ const Forms = (props) => {
     rua: "",
     bairro: "",
     cidade: "",
-    uf: null,
+    uf: "SP",
   });
 
   const {
@@ -265,6 +265,10 @@ const Forms = (props) => {
                     id="cep"
                     name="cep"
                     type="text"
+                    mask="99999-999"
+                    maskChar=" "
+                    tag={InputMask}
+                    normalize={()=>parseInt(cep.replace(/[^0-9]/g, ''))}
                     value={cep}
                     onChange={handleInputChange}
                     onKeyPress={(e) => {
