@@ -141,19 +141,18 @@ const List = () => {
                 sort: true,
               },
               {
+                dataField: "sigla",
+                text: "Sigla",
+                sort: true,
+              },
+              {
                 dataField: "nome",
                 text: "Nome",
                 sort: true,
               },
 
               {
-                dataField: "codigo",
-                text: "Codigo",
-                sort: true,
-              },
-
-              {
-                dataField: "endereço",
+                dataField: "rua",
                 text: "Endereço",
                 sort: true,
               },

@@ -6,7 +6,7 @@ const lojaApiSlice = apiSlice.injectEndpoints({
       query: () => "/lojas/v1",
     }),
     getLoja: builder.mutation({
-      query: ({ id }) => `/lojas/v1/${id}`,
+      query: (id) => `/lojas/v1/${id}`,
     }),
     addLoja: builder.mutation({
       query: (rest) => ({
