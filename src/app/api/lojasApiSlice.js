@@ -1,7 +1,6 @@
 import { apiSlice } from "./apiSlice";
 
 const lojaApiSlice = apiSlice.injectEndpoints({
- 
   endpoints: (builder) => ({
     getLojas: builder.mutation({
       query: () => "/lojas/v1",
@@ -23,7 +22,20 @@ const lojaApiSlice = apiSlice.injectEndpoints({
         body: { rest },
       }),
     }),
+
+    deleteLoja: builder.mutation({
+      query: (id) => ({
+        url: `/lojas/v1/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetLojasMutation, useGetLojaMutation, useAddLojaMutation, useUpdateLojaMutation } = lojaApiSlice;
+export const {
+  useGetLojasMutation,
+  useGetLojaMutation,
+  useAddLojaMutation,
+  useUpdateLojaMutation,
+  useDeleteLojaMutation,
+} = lojaApiSlice;

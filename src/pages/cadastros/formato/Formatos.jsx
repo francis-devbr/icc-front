@@ -23,18 +23,19 @@ const Formatos = () => {
       <Container className="mt--6" fluid>
         <Row>
           <Col>
-            <Card className="shadow">
-              <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/formatos/new")}
-                  >
-                    <i className="fas fa-store-slash"></i> Adicionar Novo
-                    Formato Loja
-                  </Button>
-                )}
+            <Card className="shadow" style={{ minHeight: "550px" }}>
+              <CardHeader>
+                <Row className="align-items-center">
+                  <Col className="text-left" xs="12">
+                    <Button
+                      className="btn-neutral"
+                      color="default"
+                      onClick={() => navigate("/admin/formatos/new")}
+                    >
+                      <i className="ni ni-book-bookmark"></i> Adicionar
+                    </Button>
+                  </Col>
+                </Row>
               </CardHeader>
               <CardBody>
                 <List />

@@ -36,9 +36,10 @@ const Forms = (props) => {
   const [naturezas, setNaturezas] = useState(null);
 
   const [ocorrencia, setOcorrencia] = useState({
+    id: props?.id,
     protocolo: "",
     data_ocorrencia: "",
-    naturezaFato: null,
+    natureza_fato: {},
     valor: 0,
     responsavel: "",
     inquerito_policial: "",
@@ -49,11 +50,13 @@ const Forms = (props) => {
   });
 
   const {
+    id,
     protocolo,
     data_ocorrencia,
     valor,
     responsavel,
     inquerito_policial,
+    natureza_fato,
     delegacia,
     loja,
     observacao,
@@ -99,15 +102,21 @@ const Forms = (props) => {
     }));
   };
 
+  const handleNaturezaInputChange = (event) => {
+    const { name, value } = event.target;
+    const n = naturezas?.filter((n) => n.id === Number(value));
+
+    setOcorrencia((prevState) => ({
+      ...prevState,
+      [name]: n[0],
+    }));
+  };
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(ocorrencia);
     await addOcorrencia(ocorrencia)
       .then((r) => {
-        setOcorrencia((prevState) => ({
-          ...prevState,
-          id: r.data.id,
-        }));
         successAlert();
       })
       .catch((e) => {
@@ -196,9 +205,11 @@ const Forms = (props) => {
               </Label>
               <Input
                 className="form-control-sm"
-                id="naturezaFato"
-                name="naturezaFato"
+                id="natureza_fato"
+                name="natureza_fato"
                 type="select"
+                value={natureza_fato?.id}
+                onChange={handleNaturezaInputChange}
               >
                 <option></option>
                 {naturezas?.map((f) => (
@@ -280,12 +291,14 @@ const Forms = (props) => {
               <Label className="form-control-label" for="status">
                 Status
               </Label>
+
               <Input
                 className="form-control-sm"
                 id="status"
                 name="status"
                 type="select"
-                defaultValue={status}
+                value={status}
+                onChange={handleInputChange}
                 required
               >
                 <option></option>
@@ -302,7 +315,7 @@ const Forms = (props) => {
           <Col md="1">
             <FormGroup>
               <Label className="form-control-label" for="loja">
-                Codigo Loja
+                Loja
               </Label>
               <Input
                 className="form-control-sm"
@@ -311,6 +324,11 @@ const Forms = (props) => {
                 value={loja}
                 type="text"
                 onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    console.log("enter aqui");
+                  }
+                }}
               />
             </FormGroup>
           </Col>
@@ -323,7 +341,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="nome-loja"
                 name="nome-loja"
-                value=""
                 type="text"
               />
             </FormGroup>
@@ -337,7 +354,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="diretor-loja"
                 name="diretor-loja"
-                value=""
                 type="text"
               />
             </FormGroup>
@@ -352,7 +368,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="formato-loja"
                 name="formato-loja"
-                value=""
                 type="text"
               />
             </FormGroup>
@@ -366,7 +381,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="bandeira-loja"
                 name="bandeira-loja"
-                value=""
                 type="text"
               />
             </FormGroup>
@@ -381,7 +395,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="cidade-loja"
                 name="cidade-loja"
-                value=""
                 type="text"
               />
             </FormGroup>
@@ -396,7 +409,6 @@ const Forms = (props) => {
                 className="form-control-sm"
                 id="uf-loja"
                 name="uf-loja"
-                value=""
                 type="text"
               />
             </FormGroup>

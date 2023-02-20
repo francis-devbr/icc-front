@@ -10,10 +10,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import {
-  useAddLojaMutation,
-  useGetLojaMutation,
-} from "app/api/lojasApiSlice";
+import { useAddLojaMutation, useGetLojaMutation } from "app/api/lojasApiSlice";
 import { useGetCepMutation } from "app/api/cepApiSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +28,7 @@ const Forms = (props) => {
   const [loja, setLoja] = useState({
     sigla: "",
     nome: "",
-    formato: {},
+    formato: null,
     bandeira: {},
     cep: "",
     numero: "",
@@ -67,7 +64,7 @@ const Forms = (props) => {
     const { name, value } = event.target;
     setLoja((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: value.toUpperCase(),
     }));
   };
 
@@ -137,14 +134,32 @@ const Forms = (props) => {
         <Row>
           <Col md="1">
             <FormGroup>
-              <Label for="id">
-                <i class="fa-solid fa-hashtag"></i> ID
+              <Label className="form-control-label" for="id">
+                Sigla
               </Label>
               <Input
-                id="id"
-                name="id"
+                className="form-control-sm"
+                id="sigla"
+                name="sigla"
                 type="text"
                 value={id}
+                onChange={(e) => handleInputChange}
+                
+              />
+            </FormGroup>
+          </Col>
+
+          <Col md="4">
+            <FormGroup>
+              <Label className="form-control-label" for="unidade">
+                Unidade
+              </Label>
+              <Input
+                className="form-control-sm"
+                id="unidade"
+                name="unidade"
+                type="text"
+                value={nome}
                 onChange={(e) => handleInputChange}
               />
             </FormGroup>
@@ -152,9 +167,12 @@ const Forms = (props) => {
 
           <Col md="3">
             <FormGroup>
-              <Label for="formato">Formato</Label>
+              <Label className="form-control-label" for="formato">
+                Formato
+              </Label>
 
               <Input
+                className="form-control-sm"
                 id="formato"
                 name="formato"
                 type="select"
@@ -172,19 +190,14 @@ const Forms = (props) => {
           </Col>
           <Col md="4">
             <FormGroup>
-              <Label for="bandeira">Bandeira</Label>
-              <Input id="bandeira" name="bandeira" type="text" />
-            </FormGroup>
-          </Col>
-          <Col md="4">
-            <FormGroup>
-              <Label for="unidade">Unidade</Label>
+              <Label className="form-control-label" for="bandeira">
+                Bandeira
+              </Label>
               <Input
-                id="unidade"
-                name="unidade"
+                className="form-control-sm"
+                id="bandeira"
+                name="bandeira"
                 type="text"
-                value={nome}
-                onChange={(e) => handleInputChange}
               />
             </FormGroup>
           </Col>
@@ -193,38 +206,44 @@ const Forms = (props) => {
         <Row>
           <Col md="4">
             <FormGroup>
-              <Label for="responsavel">
+              <Label className="form-control-label" for="responsavel">
                 <i className="fa-solid fa-user-tie"></i> Responsável
               </Label>
-              <Input id="responsavel" name="responsavel" type="text" />
+              <Input
+                className="form-control-sm"
+                id="responsavel"
+                name="responsavel"
+                type="text"
+              />
             </FormGroup>
           </Col>
         </Row>
         <Row className="row-cols-lg-auto g-3 align-items-center">
           <Col md="3">
             <FormGroup>
-              <Label for="logradouro">
+              <Label className="form-control-label" for="logradouro">
                 <i className="fa-solid fa-location-dot"></i> CEP
               </Label>
               <InputGroup>
                 <Input
+                  className="form-control-sm"
                   id="logradouro"
                   name="logradouro"
                   type="text"
                   value={cep}
                   onChange={(e) => handleInputChange}
                 />
-                <Button color="primary" onClick={(e) => findByCEP(e)}>
-                  Pesquisar
-                </Button>
               </InputGroup>
             </FormGroup>
           </Col>
 
           <Col md="5">
             <FormGroup>
-              <Label for="logradouro">Logradouro</Label>
+              <Label className="form-control-label" for="logradouro">
+                Logradouro
+              </Label>
               <Input
+                className="form-control-sm"
                 id="logradouro"
                 name="logradouro"
                 type="text"
@@ -236,8 +255,11 @@ const Forms = (props) => {
 
           <Col md="1">
             <FormGroup>
-              <Label for="numero">Numero</Label>
+              <Label className="form-control-label" for="numero">
+                Numero
+              </Label>
               <Input
+                className="form-control-sm"
                 id="numero"
                 name="numero"
                 type="text"
@@ -249,8 +271,11 @@ const Forms = (props) => {
 
           <Col md="3">
             <FormGroup>
-              <Label for="numero">Complemento</Label>
+              <Label className="form-control-label" for="numero">
+                Complemento
+              </Label>
               <Input
+                className="form-control-sm"
                 id="numero"
                 name="numero"
                 type="text"
@@ -263,8 +288,11 @@ const Forms = (props) => {
         <Row>
           <Col md="3">
             <FormGroup>
-              <Label for="bairro">Bairro</Label>
+              <Label className="form-control-label" for="bairro">
+                Bairro
+              </Label>
               <Input
+                className="form-control-sm"
                 id="bairro"
                 name="bairro"
                 type="text"
@@ -276,8 +304,11 @@ const Forms = (props) => {
 
           <Col md="2">
             <FormGroup>
-              <Label for="localidade">Localidade</Label>
+              <Label className="form-control-label" for="localidade">
+                Localidade
+              </Label>
               <Input
+                className="form-control-sm"
                 id="localidade"
                 name="localidade"
                 type="text"
@@ -289,9 +320,12 @@ const Forms = (props) => {
 
           <Col md="2">
             <FormGroup>
-              <Label for="uf">UF</Label>
+              <Label className="form-control-label" for="uf">
+                UF
+              </Label>
 
               <Input
+                className="form-control-sm"
                 id="uf"
                 name="uf"
                 type="select"
@@ -312,8 +346,11 @@ const Forms = (props) => {
 
           <Col md="2">
             <FormGroup>
-              <Label for="regiao">Regiao</Label>
+              <Label className="form-control-label" for="regiao">
+                Regiao
+              </Label>
               <Input
+                className="form-control-sm"
                 id="regiao"
                 name="regiao"
                 type="text"

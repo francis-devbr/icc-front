@@ -13,7 +13,15 @@ const Pessoa = () => {
         <Row>
           <Col>
             <Card className="shadow">
-              <CardHeader className="border-0"></CardHeader>
+              <CardHeader>
+                <h3 className="mb-0">
+                  {params.acao === "new"
+                    ? "Novo registro"
+                    : params.acao === "view"
+                    ? `Pessoa #${params.id}`
+                    : `Editar Pessoa #${params.id}`}
+                </h3>
+              </CardHeader>
               <CardBody>
                 <Forms acao={params.acao} id={params.id} />
               </CardBody>
