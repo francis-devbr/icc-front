@@ -29,7 +29,7 @@ const Forms = (props) => {
     sigla: "",
     nome: "",
     formato: null,
-    bandeira: {},
+    bandeira: null,
     cep: "",
     numero: "",
     complemento: "",
@@ -82,19 +82,19 @@ const Forms = (props) => {
   const [bairro, setBairro] = useState("");
 
   useEffect(() => {
-    const formatosLoja = async () => {
-      const r = await getFormatos();
-      setFormatos(r.data);
-    };
-
-    formatosLoja();
-
     const ufs = async () => {
       const r = await getUfs();
       setUfs(r.data);
     };
 
     ufs();
+
+    const formatosLoja = async () => {
+      const r = await getFormatos();
+      setFormatos(r.data);
+    };
+
+    formatosLoja();
 
     if (props?.id) {
       const get = async () => {
@@ -142,9 +142,8 @@ const Forms = (props) => {
                 id="sigla"
                 name="sigla"
                 type="text"
-                value={id}
+                value={sigla}
                 onChange={(e) => handleInputChange}
-                
               />
             </FormGroup>
           </Col>
@@ -203,23 +202,8 @@ const Forms = (props) => {
           </Col>
         </Row>
 
-        <Row>
-          <Col md="4">
-            <FormGroup>
-              <Label className="form-control-label" for="responsavel">
-                <i className="fa-solid fa-user-tie"></i> Responsável
-              </Label>
-              <Input
-                className="form-control-sm"
-                id="responsavel"
-                name="responsavel"
-                type="text"
-              />
-            </FormGroup>
-          </Col>
-        </Row>
         <Row className="row-cols-lg-auto g-3 align-items-center">
-          <Col md="3">
+          <Col md="2">
             <FormGroup>
               <Label className="form-control-label" for="logradouro">
                 <i className="fa-solid fa-location-dot"></i> CEP
@@ -269,7 +253,7 @@ const Forms = (props) => {
             </FormGroup>
           </Col>
 
-          <Col md="3">
+          <Col md="4">
             <FormGroup>
               <Label className="form-control-label" for="numero">
                 Complemento
@@ -318,7 +302,7 @@ const Forms = (props) => {
             </FormGroup>
           </Col>
 
-          <Col md="2">
+          <Col md="1">
             <FormGroup>
               <Label className="form-control-label" for="uf">
                 UF
@@ -356,6 +340,22 @@ const Forms = (props) => {
                 type="text"
                 value={regiao}
               ></Input>
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md="4">
+            <FormGroup>
+              <Label className="form-control-label" for="responsavel">
+                <i className="fa-solid fa-user-tie"></i> Responsável
+              </Label>
+              <Input
+                className="form-control-sm"
+                id="responsavel"
+                name="responsavel"
+                type="text"
+              />
             </FormGroup>
           </Col>
         </Row>
