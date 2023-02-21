@@ -1,30 +1,54 @@
-import { useKeycloak } from "@react-keycloak/web";
-import { useNavigate } from "react-router-dom";
-import parametros from "app/data/params.json";
-import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useEffect, useState } from "react";
-import { useGetNaturezasMutation } from "app/api/naturezaFatoApiSlice";
+import React, { useEffect, useState } from "react";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-
+import classnames from "classnames";
+// reactstrap components
 import {
-  useAddOcorrenciaMutation,
-  useGetOcorrenciaMutation,
-} from "app/api/ocorrencia/ocorrenciaApiSlice";
-import LoadingPage from "components/LoadingPage";
+  Card,
+  CardBody,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
+  Button,
+  Row,
+  Col,
+  FormGroup,
+  Label,
+  Input,
+  CardHeader,
+} from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { useKeycloak } from "@react-keycloak/web";
+import { useGetNaturezasMutation } from "app/api/naturezaFatoApiSlice";
 import { useGetLojaBySiglaMutation } from "app/api/lojasApiSlice";
-
+import { useGetOcorrenciaMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
+import { useAddOcorrenciaMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
+import LoadingPage from "components/LoadingPage";
+import parametros from "app/data/params.json";
+import UploadImages from "../upload/UploadImages";
 const Forms = (props) => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
-  const [alert, setAlert] = useState(null);
   const [getNaturezas] = useGetNaturezasMutation();
-
   const [getLojaBySigla] = useGetLojaBySiglaMutation();
-
   const [getOcorrencia, { isLoading }] = useGetOcorrenciaMutation();
   const [addOcorrencia] = useAddOcorrenciaMutation();
 
+  const [state, setState] = useState({
+    tabs: 1,
+  });
+
+  const [alert, setAlert] = useState(null);
+
   const [naturezas, setNaturezas] = useState(null);
+
+  const toggleNavs = (e, state, index) => {
+    e.preventDefault();
+    setState({
+      [state]: index,
+    });
+  };
 
   const [ocorrencia, setOcorrencia] = useState({
     id: props?.id,
@@ -103,19 +127,6 @@ const Forms = (props) => {
     }));
   };
 
-  const handleOnSubmit = async (event) => {
-    event.preventDefault();
-
-    await addOcorrencia(ocorrencia)
-      .then((r) => {
-        successAlert();
-      })
-      .catch((e) => {
-        console.log(e);
-        errorAlert();
-      });
-  };
-
   const searchLoja = async (event) => {
     event.preventDefault();
 
@@ -144,24 +155,24 @@ const Forms = (props) => {
     }
     getNaturezas().then((x) => setNaturezas(x.data));
   }, []);
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
 
-  const [state, setState] = useState({
-    tabs: 1,
-  });
-
-  const toggleNavs = (e, state, index) => {
-    e.preventDefault();
-    setState({
-      [state]: index,
-    });
+    await addOcorrencia(ocorrencia)
+      .then((r) => {
+        successAlert();
+      })
+      .catch((e) => {
+        console.log(e);
+        errorAlert();
+      });
   };
   return (
     <>
       {alert}
       {isLoading && <LoadingPage />}
-
-      <Form role="form">
-        <div className="pl-lg-4">
+      {!isLoading && (
+        <>
           <Row>
             <Col md="2">
               <FormGroup>
@@ -274,226 +285,327 @@ const Forms = (props) => {
             </Col>
           </Row>
 
-          <Row>
-            <Col md="6">
-              <Row>
-                <Col md="6">
-                  <FormGroup>
-                    <Label
-                      className="form-control-label"
-                      for="inquerito_policial"
-                    >
-                      <i class="fa-solid fa-hashtag"></i> Inquerito Policial
-                    </Label>
-                    <Input
-                      className="form-control-sm"
-                      id="inquerito_policial"
-                      name="inquerito_policial"
-                      value={inquerito_policial}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md="6">
-                  <FormGroup>
-                    <Label className="form-control-label" for="delegacia">
-                      D.P
-                    </Label>
-                    <Input
-                      className="form-control-sm"
-                      id="delegacia"
-                      name="delegacia"
-                      value={delegacia}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-
-              <FormGroup>
-                <Input
-                  id="observacao"
-                  name="observacao"
-                  placeholder="Descreva o ocorrido aqui ..."
-                  rows="3"
-                  resize="none"
-                  type="textarea"
-                  value={observacao}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </div>
-        <hr className="my-4" />
-
-        <h6 className="heading-small text-muted mb-4">Dados da Loja</h6>
-        <div className="pl-lg-4">
-          <Row>
-            <Col md="1">
-              <FormGroup>
-                <Label className="form-control-label" for="loja">
-                  Sigla
-                </Label>
-                <Input
-                  className="form-control-sm"
-                  id="loja"
-                  name="loja"
-                  value={loja?.sigla}
-                  type="text"
-                  onChange={handleInputChange}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      searchLoja(e);
-                    }
-                  }}
-                />
-              </FormGroup>
-            </Col>
-            <Col md="2">
-              <FormGroup>
-                <Label className="form-control-label" for="nome-loja">
-                  Nome
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="nome-loja"
-                  name="nome-loja"
-                  value={loja?.nome}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-            <Col md="2">
-              <FormGroup>
-                <Label className="form-control-label" for="diretor-loja">
-                  Diretor
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="diretor-loja"
-                  name="diretor-loja"
-                  onChange={handleInputChange}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md="2">
-              <FormGroup>
-                <Label className="form-control-label" for="formato-loja">
-                  Formato
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="formato-loja"
-                  name="formato-loja"
-                  onChange={handleInputChange}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-            <Col md="2">
-              <FormGroup>
-                <Label className="form-control-label" for="bandeira-loja">
-                  Bandeira
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="bandeira-loja"
-                  name="bandeira-loja"
-                  onChange={handleInputChange}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md="2">
-              <FormGroup>
-                <Label className="form-control-label" for="cidade-loja">
-                  Cidade
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="cidade-loja"
-                  name="cidade-loja"
-                  value={loja?.cidade}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md="1">
-              <FormGroup>
-                <Label className="form-control-label" for="uf-loja">
-                  U.F
-                </Label>
-                <Input
-                  className="form-control-sm form-control-flush"
-                  disabled
-                  id="uf-loja"
-                  name="uf-loja"
-                  value={loja?.uf}
-                  type="text"
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </div>
-        <hr className="my-4" />
-
-        {props.acao === "view" ? (
-          keycloak?.hasResourceRole("manager") && (
-            <Button
-              color="primary"
-              className="btn  mb-2 w-25"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(`/admin/ocorrencias/${1}/edit`);
-              }}
+          <div className="nav-wrapper">
+            <Nav
+              className="nav-fill flex-column flex-md-row"
+              id="tabs-icons-text"
+              pills
+              role="tablist"
             >
-              <i className="fa-solid fa-check"></i> Editar
-            </Button>
-          )
-        ) : (
-          <>
-            <Button
-              color="primary"
-              className="btn mb-2 w-25"
-              onClick={(e) => handleOnSubmit(e)}
-            >
-              <i className="fa-solid fa-check"></i> Salvar
-            </Button>
-          </>
-        )}
+              <NavItem>
+                <NavLink
+                  aria-selected={state.tabs === 1}
+                  className={classnames("mb-sm-3 mb-md-0", {
+                    active: state.tabs === 1,
+                  })}
+                  onClick={(e) => toggleNavs(e, "tabs", 1)}
+                  href="#pablo"
+                  role="tab"
+                >
+                  <i className="ni ni-archive-2 mr-2" />
+                  Geral
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  aria-selected={state.tabs === 2}
+                  className={classnames("mb-sm-3 mb-md-0", {
+                    active: state.tabs === 2,
+                  })}
+                  onClick={(e) => toggleNavs(e, "tabs", 2)}
+                  href="#pablo"
+                  role="tab"
+                >
+                  <i className="ni ni-camera-compact mr-2" />
+                  Evidencias
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  aria-selected={state.tabs === 3}
+                  className={classnames("mb-sm-3 mb-md-0", {
+                    active: state.tabs === 3,
+                  })}
+                  onClick={(e) => toggleNavs(e, "tabs", 3)}
+                  href="#pablo"
+                  role="tab"
+                >
+                  <i className="ni ni-collection mr-2" />
+                  Observacoes
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </div>
+          <Card className="shadow">
+            <CardBody>
+              <TabContent activeTab={"tabs" + state.tabs}>
+                <TabPane tabId="tabs1">
+                  <h6 className="heading-small text-muted mb-4">
+                    Inquerito Policial
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col md="3">
+                        <FormGroup>
+                          <Label
+                            className="form-control-label"
+                            for="inquerito_policial"
+                          >
+                            <i class="fa-solid fa-hashtag"></i> Número
+                          </Label>
+                          <Input
+                            className="form-control-sm"
+                            id="inquerito_policial"
+                            name="inquerito_policial"
+                            value={inquerito_policial}
+                            type="text"
+                            onChange={handleInputChange}
+                          />
+                        </FormGroup>
+                      </Col>
 
-        <Button
-          className="btn  btn-danger mb-2 w-25"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/admin/ocorrencias");
-          }}
-        >
-          <i className="fa-solid fa-times"></i> Cancelar
-        </Button>
+                      <Col md="5">
+                        <FormGroup>
+                          <Label className="form-control-label" for="delegacia">
+                            Delegacia
+                          </Label>
+                          <Input
+                            className="form-control-sm"
+                            id="delegacia"
+                            name="delegacia"
+                            value={delegacia}
+                            type="text"
+                            onChange={handleInputChange}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  <hr className="my-4" />
+                  <h6 className="heading-small text-muted mb-4">
+                    Dados da Loja
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col md="1">
+                        <FormGroup>
+                          <Label className="form-control-label" for="loja">
+                            Sigla
+                          </Label>
+                          <Input
+                            className="form-control-sm"
+                            id="loja"
+                            name="loja"
+                            value={loja?.sigla}
+                            type="text"
+                            onChange={handleInputChange}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                searchLoja(e);
+                              }
+                            }}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="2">
+                        <FormGroup>
+                          <Label className="form-control-label" for="nome-loja">
+                            Nome
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="nome-loja"
+                            name="nome-loja"
+                            value={loja?.nome}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="2">
+                        <FormGroup>
+                          <Label
+                            className="form-control-label"
+                            for="diretor-loja"
+                          >
+                            Diretor
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="diretor-loja"
+                            name="diretor-loja"
+                            onChange={handleInputChange}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
 
-        <Button
-          className="btn  btn-danger mb-2 w-25"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/admin/ocorrencias");
-          }}
-        >
-          <i className="fa-solid fa-times"></i> Cancelar
-        </Button>
-      </Form>
+                      <Col md="2">
+                        <FormGroup>
+                          <Label
+                            className="form-control-label"
+                            for="formato-loja"
+                          >
+                            Formato
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="formato-loja"
+                            name="formato-loja"
+                            onChange={handleInputChange}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="2">
+                        <FormGroup>
+                          <Label
+                            className="form-control-label"
+                            for="bandeira-loja"
+                          >
+                            Bandeira
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="bandeira-loja"
+                            name="bandeira-loja"
+                            onChange={handleInputChange}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="2">
+                        <FormGroup>
+                          <Label
+                            className="form-control-label"
+                            for="cidade-loja"
+                          >
+                            Cidade
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="cidade-loja"
+                            name="cidade-loja"
+                            value={loja?.cidade}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="1">
+                        <FormGroup>
+                          <Label className="form-control-label" for="uf-loja">
+                            U.F
+                          </Label>
+                          <Input
+                            className="form-control-sm form-control-flush"
+                            disabled
+                            id="uf-loja"
+                            name="uf-loja"
+                            value={loja?.uf}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                </TabPane>
+                <TabPane tabId="tabs2">
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col md="4">
+                        <Card>
+                          <CardHeader>
+                            <h5 className="h3 mb-0">Fotos</h5>
+                          </CardHeader>
+
+                          <CardBody></CardBody>
+                        </Card>
+                      </Col>
+                      <Col md="4">
+                        <Card>
+                          <CardHeader>
+                            <h5 className="h3 mb-0">Videos</h5>
+                          </CardHeader>
+
+                          <CardBody></CardBody>
+                        </Card>
+                      </Col>
+                      <Col md="4">
+                        <Card>
+                          <CardHeader>
+                            <h5 className="h3 mb-0">Documentos</h5>
+                          </CardHeader>
+
+                          <CardBody></CardBody>
+                        </Card>
+                      </Col>
+                    </Row>
+                  </div>
+                </TabPane>
+                <TabPane tabId="tabs3">
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <Input
+                          id="observacao"
+                          name="observacao"
+                          placeholder="Descreva o ocorrido aqui ..."
+                          rows="3"
+                          resize="none"
+                          type="textarea"
+                          value={observacao}
+                          onChange={handleInputChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </TabPane>
+              </TabContent>
+            </CardBody>
+          </Card>
+
+          {props.acao === "view" ? (
+            keycloak?.hasResourceRole("manager") && (
+              <Button
+                color="primary"
+                className="btn  mb-2 w-25"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/admin/ocorrencias/${1}/edit`);
+                }}
+              >
+                <i className="fa-solid fa-check"></i> Editar
+              </Button>
+            )
+          ) : (
+            <>
+              <Button
+                color="primary"
+                className="btn mb-2 w-25"
+                onClick={(e) => handleOnSubmit(e)}
+              >
+                <i className="fa-solid fa-check"></i> Salvar
+              </Button>
+            </>
+          )}
+
+          <Button
+            className="btn  btn-danger mb-2 w-25"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/admin/ocorrencias");
+            }}
+          >
+            <i className="fa-solid fa-times"></i> Cancelar
+          </Button>
+        </>
+      )}
     </>
   );
 };
