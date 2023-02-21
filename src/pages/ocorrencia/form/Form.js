@@ -27,6 +27,7 @@ import { useAddOcorrenciaMutation } from "app/api/ocorrencia/ocorrenciaApiSlice"
 import LoadingPage from "components/LoadingPage";
 import parametros from "app/data/params.json";
 import UploadImages from "../upload/UploadImages";
+import Dropzone from "./Dropzone";
 const Forms = (props) => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
@@ -549,7 +550,9 @@ const Forms = (props) => {
                             </Row>
                           </CardHeader>
 
-                          <CardBody></CardBody>
+                          <CardBody>
+                            <Dropzone />
+                          </CardBody>
                         </Card>
                       </Col>
                       <Col md="4">

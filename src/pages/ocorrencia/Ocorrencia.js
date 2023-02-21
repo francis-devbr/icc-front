@@ -21,7 +21,7 @@ const Ocorrencia = (props) => {
       <Container className="mt--6" fluid>
         <Row>
           <Col>
-            <Card className="shadow">
+            <Card className="shadow" >
               <CardHeader>
                 <Row className="align-items-center">
                   <Col>
