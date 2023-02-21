@@ -100,10 +100,11 @@ const Forms = (props) => {
           <Row>
             <Col md="1">
               <FormGroup>
-                <Label for="id">
+                <Label className="form-control-label" for="id">
                   <i class="fa-solid fa-hashtag"></i> ID
                 </Label>
                 <Input
+                  className="form-control"
                   id="id"
                   name="id"
                   type="text"
@@ -114,8 +115,11 @@ const Forms = (props) => {
             </Col>
             <Col md="11">
               <FormGroup>
-                <Label for="nome">Nome</Label>
+                <Label className="form-control-label" for="nome">
+                  Nome
+                </Label>
                 <Input
+                  className="form-control"
                   id="nome"
                   name="nome"
                   type="text"

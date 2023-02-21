@@ -15,11 +15,14 @@ const Natureza = () => {
           <Col>
             <Card className="shadow">
               <CardHeader>
-                {params.acao === "new"
-                  ? "Adicionar novo registro"
-                  : params.acao === "view"
-                  ? `Formato Natureza #${params.id}`
-                  : `Editar Formato Natureza #${params.id}`}
+                <h3 className="mb-0">
+                  {params.acao === "new"
+                    ? "Novo registro"
+                    : params.acao === "view"
+                    ? `Formato Natureza #${params.id}`
+                    : `Editar Formato Natureza #${params.id}`}
+                  
+                </h3>
               </CardHeader>
               <CardBody>
                 <Forms acao={params.acao} id={params.id} />

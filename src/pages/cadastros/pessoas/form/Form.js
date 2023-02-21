@@ -1,26 +1,63 @@
 import { useKeycloak } from "@react-keycloak/web";
-import { useAddNaturezaMutation } from "app/api/naturezaFatoApiSlice";
-import { useGetNaturezaMutation } from "app/api/naturezaFatoApiSlice";
-import LoadingPage from "components/LoadingPage";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import {
+  useAddPessoaMutation,
+  useGetPessoaMutation,
+} from "app/api/pessoaApiSlice";
+
+import LoadingPage from "components/LoadingPage";
 
 const Forms = (props) => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
-  const [getNatureza, { isLoading }] = useGetNaturezaMutation();
+  const [getPessoa, { isLoading }] = useGetPessoaMutation();
 
-  const [addNatureza] = useAddNaturezaMutation();
+  const [addPessoa] = useAddPessoaMutation();
 
   const [pessoa, setPessoa] = useState({ id: null, nome: "" });
 
-  const { nome, cpf, statusPessoa } = pessoa;
+  const { id, nome } = pessoa;
+
+  const [alert, setAlert] = useState(null);
+
+  const errorAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        warning
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Erro ao registrar!"
+        onConfirm={() => setAlert(null)}
+        onCancel={() => setAlert(null)}
+      >
+        Erro ao tentar inserir o registro
+      </ReactBSAlert>
+    );
+  };
+
+  const successAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        success
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Registro Salvo!"
+        onConfirm={() => {
+          setAlert(null);
+          navigate(`/admin/pessoas`);
+        }}
+        onCancel={() => setAlert(null)}
+        timeout={2000}
+        showConfirm={false}
+      ></ReactBSAlert>
+    );
+  };
 
   useEffect(() => {
     if (props?.id) {
       const get = async () => {
-        const response = await getNatureza({ id: props.id });
+        const response = await getPessoa({ id: props.id });
         setPessoa(response.data);
       };
       get();
@@ -37,47 +74,55 @@ const Forms = (props) => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    const values = [nome];
-    let errorMsg = "";
 
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
-    });
-
-    if (allFieldsFilled) {
-      const data = {
-        nome,
-        cpf,
-        statusPessoa,
-      };
-
-      await addNatureza(data).then((r) => {
+    await addPessoa(pessoa)
+      .then((r) => {
         setPessoa((prevState) => ({
           ...prevState,
           id: r.data.id,
         }));
-        navigate(`/admin/naturezas/${r.data.id}/view`);
+
+        successAlert();
+        //navigate(`/admin/pessoas`);
+      })
+      .catch((e) => {
+        console.log(e);
+        errorAlert();
       });
-    } else {
-      errorMsg = "Please fill out all the fields.";
-    }
   };
 
   return (
     <>
+      {alert}
       {isLoading && <LoadingPage />}
       {!isLoading && (
         <Form role="form">
           <Row>
-            <Col md="3">
+            <Col md="1">
               <FormGroup>
-                <Label for="nomeLoja">Nome Completo</Label>
+                <Label className="form-control-label"  for="id">
+                  <i class="fa-solid fa-hashtag"></i> ID
+                </Label>
                 <Input
+                  className="form-control"
+                  id="id"
+                  name="id"
+                  type="text"
+                  value={id}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md="8">
+              <FormGroup>
+                <Label className="form-control-label" for="nome">
+                  Nome
+                </Label>
+                <Input
+                  className="form-control"
                   id="nome"
                   name="nome"
                   type="text"
-                  placeholder="Digite o nome completo"
                   value={nome}
                   onChange={handleInputChange}
                 />
@@ -85,33 +130,16 @@ const Forms = (props) => {
             </Col>
             <Col md="3">
               <FormGroup>
-                <Label for="nomeLoja">CPF</Label>
+                <Label className="form-control-label" for="naturezaFato">
+                  Papel
+                </Label>
                 <Input
-                  id="cpf"
-                  name="cpf"
-                  type="text"
-                  placeholder="Ex: 000.000.000-00"
-                  value={cpf}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col md="3">
-              <FormGroup>
-                <Label for="nomeLoja">STATUS</Label>
-                <Input
-                  id="statusPessoa"
-                  name="statusPessoa"
+                  className="form-control"
+                  id="papel"
+                  name="papel"
                   type="select"
-                  value={statusPessoa}
-                  onChange={handleInputChange}
                 >
                   <option>Selecione a opção</option>
-                  <option>Fornecedor</option>
-                  <option>Funcionário</option>
-                  <option>Ex Funcionário</option>
-                  <option>Colaborador</option>
-                  <option>Externo</option>
                 </Input>
               </FormGroup>
             </Col>
@@ -125,7 +153,7 @@ const Forms = (props) => {
                 className="btn  mb-2 w-25"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate(`/admin/naturezas/${nome}/edit`);
+                  navigate(`/admin/pessoas/${id}/edit`);
                 }}
               >
                 <i className="fa-solid fa-check"></i> Editar

@@ -25,7 +25,6 @@ import { useState } from "react";
 const OcorrenciasInternas = () => {
   
   const navigate = useNavigate();
-  const { keycloak } = useKeycloak();
 
   const styles = StyleSheet.create({
     page: {
@@ -57,11 +56,12 @@ const OcorrenciasInternas = () => {
 
   return (
     <>
-      <SimpleHeader name="Ocorrencia" parentName="Ocorrencia" />
+      <SimpleHeader name="Ocorrencias" parentName="Ocorrencia Interna" />
       <Container className="mt--6" fluid>
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
+<<<<<<< HEAD
               <CardHeader className="border-0">
                 {keycloak?.hasResourceRole("manager") && (
                   <><Button
@@ -79,6 +79,22 @@ const OcorrenciasInternas = () => {
                       <i className="fas fa-file-pdf"></i> Gerar Relatório PDF
                     </Button></>
                 )}
+=======
+              <CardHeader>
+                <Row className="align-items-center">
+                  <Col className="text-left" xs="12">
+                    <Button
+                      className="btn-neutral"
+                      color="default"
+                      onClick={() =>
+                        navigate("/admin/ocorrencias-internas/new")
+                      }
+                    >
+                      <i className="ni ni-folder-17"></i> Adicionar
+                    </Button>
+                  </Col>
+                </Row>
+>>>>>>> 529d4c9f4a4113e641e280737bd4391d8c474ca7
               </CardHeader>
               <CardBody>
                 <List />

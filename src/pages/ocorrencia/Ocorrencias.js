@@ -1,4 +1,3 @@
-import { useKeycloak } from "@react-keycloak/web";
 import SimpleHeader from "components/header/SimpleHeader";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,9 +11,8 @@ import {
 } from "reactstrap";
 
 import List from "./List";
-const Ocorrencias = (props) => {
+const Ocorrencias = () => {
   const navigate = useNavigate();
-  const { keycloak } = useKeycloak();
 
   return (
     <>
@@ -24,19 +22,26 @@ const Ocorrencias = (props) => {
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
-              <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/ocorrencias/new")}
-                  >
-                    <i className="ni ni-folder-17"></i> Adicionar Nova
-                    Ocorrência
-                  </Button>
-                )}
-              </CardHeader>
+              <CardHeader>
+                <Row className="align-items-center">
+                  <Col>
+                    <h3 className="mb-0">Lista de Ocorrencias</h3>
+                  </Col>
 
+                  <Col className="text-right">
+                    <Button
+                      className="btn-icon btn-neutral"
+                      color="default"
+                      onClick={() => navigate("/admin/ocorrencias/new")}
+                    >
+                      <span className="btn-inner--icon">
+                        <i class="ni ni-fat-add"></i>
+                      </span>
+                      <span className="btn-inner--text">NOVO REGISTRO</span>
+                    </Button>
+                  </Col>
+                </Row>
+              </CardHeader>
               <CardBody>
                 <List />
               </CardBody>
