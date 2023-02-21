@@ -3,12 +3,6 @@
   margin-right: 10px;
 }
 
-.card .table td,
-.card .table th {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .navbar-vertical.navbar-expand-md .navbar-nav .nav-link {
   padding: 0.65rem 1rem;
 }

@@ -8,6 +8,14 @@ const lojaApiSlice = apiSlice.injectEndpoints({
     getLoja: builder.mutation({
       query: (id) => `/lojas/v1/${id}`,
     }),
+
+    getLojaBySigla: builder.mutation({
+      query: (args) => {
+        const { sigla } = args;
+        return { url: "/lojas/v1/search", method: "GET", params: { sigla } };
+      },
+    }),
+
     addLoja: builder.mutation({
       query: (rest) => ({
         url: "/lojas/v1",
@@ -35,6 +43,7 @@ const lojaApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetLojasMutation,
   useGetLojaMutation,
+  useGetLojaBySiglaMutation,
   useAddLojaMutation,
   useUpdateLojaMutation,
   useDeleteLojaMutation,

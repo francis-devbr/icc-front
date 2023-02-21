@@ -1,11 +1,20 @@
 import SimpleHeader from "components/header/SimpleHeader";
-import { useParams } from "react-router-dom";
-import { Card, Container, Row, Col, CardHeader, CardBody } from "reactstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  CardHeader,
+  CardBody,
+  Button,
+} from "reactstrap";
 
 import Forms from "./form/Form";
 
 const Ocorrencia = (props) => {
   const params = useParams();
+  const navigate = useNavigate();
   return (
     <>
       <SimpleHeader name="Ocorrencia" parentName="Ocorrencia" />
@@ -14,13 +23,30 @@ const Ocorrencia = (props) => {
           <Col>
             <Card className="shadow">
               <CardHeader>
-                <h3 className="mb-0">
-                  {params.acao === "new"
-                    ? "Novo registro"
-                    : params.acao === "view"
-                    ? `Ocorrencia #${params.id}`
-                    : `Editar Ocorrencia #${params.id}`}
-                </h3>
+                <Row className="align-items-center">
+                  <Col>
+                    <h3 className="mb-0">
+                      {params.acao === "new"
+                        ? "Novo registro"
+                        : params.acao === "view"
+                        ? `Ocorrencia #${params.id}`
+                        : `Editar Ocorrencia #${params.id}`}
+                    </h3>
+                  </Col>
+
+                  {params.acao !== "new" ? (
+                    <Button
+                      className="btn-icon btn-neutral"
+                      color="default"
+                      onClick={() => navigate("/admin/ocorrencias/new")}
+                    >
+                      <span className="btn-inner--icon">
+                        <i class="ni ni-fat-add"></i>
+                      </span>
+                      <span className="btn-inner--text">NOVO REGISTRO</span>
+                    </Button>
+                  ) : null}
+                </Row>
               </CardHeader>
               <CardBody>
                 <Forms acao={params.acao} id={params.id} />

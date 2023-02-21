@@ -14,7 +14,6 @@ import List from "./List";
 const Ocorrencias = () => {
   const navigate = useNavigate();
 
-
   return (
     <>
       <SimpleHeader name="Ocorrencias" parentName="Ocorrencia" />
@@ -23,17 +22,22 @@ const Ocorrencias = () => {
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
-            <CardHeader>
+              <CardHeader>
                 <Row className="align-items-center">
-                  <Col className="text-left" xs="12">
+                  <Col>
+                    <h3 className="mb-0">Lista de Ocorrencias</h3>
+                  </Col>
+
+                  <Col className="text-right">
                     <Button
-                      className="btn-neutral"
+                      className="btn-icon btn-neutral"
                       color="default"
-                      onClick={() =>
-                        navigate("/admin/ocorrencias/new")
-                      }
+                      onClick={() => navigate("/admin/ocorrencias/new")}
                     >
-                      <i className="ni ni-folder-17"></i> Adicionar
+                      <span className="btn-inner--icon">
+                        <i class="ni ni-fat-add"></i>
+                      </span>
+                      <span className="btn-inner--text">NOVO REGISTRO</span>
                     </Button>
                   </Col>
                 </Row>

@@ -4,7 +4,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
-import { Button, Col, Container, Row } from "reactstrap";
+import { Badge, Button, Col, Container, Row } from "reactstrap";
 
 import LoadingPage from "components/LoadingPage";
 import ReactBSAlert from "react-bootstrap-sweetalert";
@@ -38,15 +38,13 @@ const pagination = paginationFactory({
   ),
 });
 
-const { SearchBar } = Search;
+const { SearchBar, ClearSearchButton } = Search;
 
 const List = () => {
   const [alert, setAlert] = useState(null);
-
-  const [show, setShow] = useState(false);
   const componentRef = useRef(null);
   const navigate = useNavigate();
-  const [getOcorrencias, { data, error, isLoading, isFetching, isSuccess }] =
+  const [getOcorrencias, { isLoading, isSuccess }] =
     useGetOcorrenciasMutation();
 
   const [deleteOcorrencia] = useDeleteOcorrenciaMutation();
@@ -83,6 +81,25 @@ const List = () => {
     );
 
     setAlert(null);
+  }
+
+  function statusFormatter(cell, row, rowIndex, formatExtraData) {
+    return (
+      <>
+        <Badge className="badge-dot mr-4" color="">
+          <i
+            className={
+              row.status === "andamento"
+                ? `bg-info`
+                : row.status === "encerrado"
+                ? `bg-success`
+                : `bg-warning`
+            }
+          />
+          <span className="status">{row.status}</span>
+        </Badge>
+      </>
+    );
   }
 
   function actionFormatter(cell, row, rowIndex, formatExtraData) {
@@ -167,13 +184,13 @@ const List = () => {
               },
 
               {
-                dataField: "loja",
+                dataField: "loja.nome",
                 text: "Loja",
                 sort: true,
               },
 
               {
-                dataField: "uf",
+                dataField: "loja.uf",
                 text: "UF",
                 sort: true,
               },
@@ -185,9 +202,9 @@ const List = () => {
               },
 
               {
-                dataField: "status",
                 text: "Status",
                 sort: true,
+                formatter: statusFormatter,
               },
 
               {
@@ -205,26 +222,23 @@ const List = () => {
             search
           >
             {(props) => (
-              <div className="py-4">
-                <Container fluid>
-                  <Row>
-                    <Col>
-                      <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-0 pb-1 float-left"
-                      >
-                        <label>
-                          Procurar:
-                          <SearchBar
-                            className="form-control-sm"
-                            placeholder="Protocolo"
-                            {...props.searchProps}
-                          />
-                        </label>
-                      </div>
-                    </Col>
-                  </Row>
-                </Container>
+              <div className="py-4 table-responsive">
+                <div
+                  id="datatable-basic_filter"
+                  className="dataTables_filter px-0 pb-1 float-left"
+                >
+                  <label>
+                    Procurar:
+                    <SearchBar
+                      className="form-control-sm"
+                      placeholder="digite aqui"
+                      {...props.searchProps}
+                    />
+                  </label>{" "}
+                  {}
+                  <ClearSearchButton {...props.searchProps} />
+                </div>
+
                 <BootstrapTable
                   striped
                   hover
@@ -234,7 +248,6 @@ const List = () => {
                   bootstrap4={true}
                   pagination={pagination}
                   bordered={false}
-                  id="react-bs-table"
                   noDataIndication="Nenhum dado encontrado"
                 />
               </div>
