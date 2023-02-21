@@ -521,7 +521,32 @@ const Forms = (props) => {
                       <Col md="4">
                         <Card>
                           <CardHeader>
-                            <h5 className="h3 mb-0">Fotos</h5>
+                            <Row className="align-items-center">
+                              <Col xs="2" className="col-auto">
+                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                  <i className="ni ni-image" />
+                                </div>
+                              </Col>
+                              <Col xs="6">
+                                <h5 className="h3 mb-0">Fotos</h5>
+                              </Col>
+                              <Col className="text-right" xs="4">
+                                <Button
+                                  className="btn-icon btn-neutral"
+                                  color="default"
+                                  href="#pablo"
+                                  onClick={(e) => e.preventDefault()}
+                                  size="sm"
+                                >
+                                  <span className="btn-inner--icon">
+                                    <i class="ni ni-cloud-upload-96"></i>
+                                  </span>
+                                  <span className="btn-inner--text">
+                                    UPLOAD
+                                  </span>
+                                </Button>
+                              </Col>
+                            </Row>
                           </CardHeader>
 
                           <CardBody></CardBody>
@@ -530,7 +555,32 @@ const Forms = (props) => {
                       <Col md="4">
                         <Card>
                           <CardHeader>
-                            <h5 className="h3 mb-0">Videos</h5>
+                            <Row className="align-items-center">
+                              <Col xs="2" className="col-auto">
+                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                  <i className="ni ni-tv-2" />
+                                </div>
+                              </Col>
+                              <Col xs="6">
+                                <h5 className="h3 mb-0">Videos</h5>
+                              </Col>
+                              <Col className="text-right" xs="4">
+                                <Button
+                                  className="btn-icon btn-neutral"
+                                  color="default"
+                                  href="#pablo"
+                                  onClick={(e) => e.preventDefault()}
+                                  size="sm"
+                                >
+                                  <span className="btn-inner--icon">
+                                    <i class="ni ni-cloud-upload-96"></i>
+                                  </span>
+                                  <span className="btn-inner--text">
+                                    UPLOAD
+                                  </span>
+                                </Button>
+                              </Col>
+                            </Row>
                           </CardHeader>
 
                           <CardBody></CardBody>
@@ -539,7 +589,32 @@ const Forms = (props) => {
                       <Col md="4">
                         <Card>
                           <CardHeader>
-                            <h5 className="h3 mb-0">Documentos</h5>
+                            <Row className="align-items-center">
+                              <Col xs="2" className="col-auto">
+                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                  <i className="ni ni-single-copy-04" />
+                                </div>
+                              </Col>
+                              <Col xs="6">
+                                <h5 className="h3 mb-0">Documentos</h5>
+                              </Col>
+                              <Col className="text-right" xs="4">
+                                <Button
+                                  className="btn-icon btn-neutral"
+                                  color="default"
+                                  href="#pablo"
+                                  onClick={(e) => e.preventDefault()}
+                                  size="sm"
+                                >
+                                  <span className="btn-inner--icon">
+                                    <i class="ni ni-cloud-upload-96"></i>
+                                  </span>
+                                  <span className="btn-inner--text">
+                                    UPLOAD
+                                  </span>
+                                </Button>
+                              </Col>
+                            </Row>
                           </CardHeader>
 
                           <CardBody></CardBody>
