@@ -29,6 +29,23 @@ const ocorrenciaApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+
+    getOcorrenciasDocumentos: builder.mutation({
+      query: (id) => {
+        console.log(id);
+
+        return {
+          url: `/ocorrencias/files/v1/${id}`,
+        };
+      },
+    }),
+
+    deleteOcorrenciaDocumento: builder.mutation({
+      query: (id) => ({
+        url: `/ocorrencias/files/v1/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -38,4 +55,6 @@ export const {
   useAddOcorrenciaMutation,
   useUpdateOcorrenciaMutation,
   useDeleteOcorrenciaMutation,
+  useDeleteOcorrenciaDocumentoMutation,
+  useGetOcorrenciasDocumentosMutation,
 } = ocorrenciaApiSlice;

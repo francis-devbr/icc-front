@@ -26,8 +26,9 @@ import { useGetOcorrenciaMutation } from "app/api/ocorrencia/ocorrenciaApiSlice"
 import { useAddOcorrenciaMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
 import LoadingPage from "components/LoadingPage";
 import parametros from "app/data/params.json";
-import UploadImages from "../upload/UploadImages";
 import Dropzone from "./Dropzone";
+import { useGetOcorrenciasDocumentosMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
+
 const Forms = (props) => {
   const navigate = useNavigate();
   const { keycloak } = useKeycloak();
@@ -35,13 +36,13 @@ const Forms = (props) => {
   const [getLojaBySigla] = useGetLojaBySiglaMutation();
   const [getOcorrencia, { isLoading }] = useGetOcorrenciaMutation();
   const [addOcorrencia] = useAddOcorrenciaMutation();
-
+  const [getOcorrenciasDocumentos] = useGetOcorrenciasDocumentosMutation();
   const [state, setState] = useState({
     tabs: 1,
   });
 
   const [alert, setAlert] = useState(null);
-
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [naturezas, setNaturezas] = useState(null);
 
   const toggleNavs = (e, state, index) => {
@@ -147,15 +148,34 @@ const Forms = (props) => {
   };
 
   useEffect(() => {
+    getNaturezas().then((x) => setNaturezas(x.data));
     if (props?.id) {
       const get = async () => {
-        const response = await getOcorrencia({ id: props.id });
-        setOcorrencia(response.data);
+        await getOcorrencia({ id: props.id }).then((r) => {
+          getOcorrenciasDocumentos(r.data.protocolo).then((response) => {
+            const documentosFormatted = response.data.map((doc) => {
+              return {
+                ...doc,
+                id: doc.id,
+                preview: doc.url,
+                readableSize: doc.readable_size,
+                file: null,
+                error: false,
+                uploaded: true,
+              };
+            });
+            setUploadedFiles(documentosFormatted);
+          });
+
+          setOcorrencia(r.data);
+        });
       };
       get();
     }
-    getNaturezas().then((x) => setNaturezas(x.data));
   }, []);
+
+  useEffect(() => {}, []);
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
@@ -517,114 +537,126 @@ const Forms = (props) => {
                   </div>
                 </TabPane>
                 <TabPane tabId="tabs2">
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="4">
-                        <Card>
-                          <CardHeader>
-                            <Row className="align-items-center">
-                              <Col xs="2" className="col-auto">
-                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                  <i className="ni ni-image" />
-                                </div>
-                              </Col>
-                              <Col xs="6">
-                                <h5 className="h3 mb-0">Fotos</h5>
-                              </Col>
-                              <Col className="text-right" xs="4">
-                                <Button
-                                  className="btn-icon btn-neutral"
-                                  color="default"
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                  size="sm"
-                                >
-                                  <span className="btn-inner--icon">
-                                    <i class="ni ni-cloud-upload-96"></i>
-                                  </span>
-                                  <span className="btn-inner--text">
-                                    UPLOAD
-                                  </span>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </CardHeader>
+                  <Row>
+                    <Col md="3">
+                      <Card>
+                        <CardHeader>
+                          <Row className="align-items-center">
+                            <Col xs="2" className="col-auto">
+                              <div className="icon icon-shape">
+                                <i className="ni ni-image" />
+                              </div>
+                            </Col>
+                            <Col xs="6">
+                              <h5 className="h3 mb-0">Fotos</h5>
+                            </Col>
+                          </Row>
+                        </CardHeader>
 
-                          <CardBody>
-                            <Dropzone />
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col md="4">
-                        <Card>
-                          <CardHeader>
-                            <Row className="align-items-center">
-                              <Col xs="2" className="col-auto">
-                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                  <i className="ni ni-tv-2" />
-                                </div>
-                              </Col>
-                              <Col xs="6">
-                                <h5 className="h3 mb-0">Videos</h5>
-                              </Col>
-                              <Col className="text-right" xs="4">
-                                <Button
-                                  className="btn-icon btn-neutral"
-                                  color="default"
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                  size="sm"
-                                >
-                                  <span className="btn-inner--icon">
-                                    <i class="ni ni-cloud-upload-96"></i>
-                                  </span>
-                                  <span className="btn-inner--text">
-                                    UPLOAD
-                                  </span>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </CardHeader>
+                        <CardBody>
+                          <Dropzone
+                            accept={{
+                              "image/*": [".jpeg", ".png"],
+                            }}
+                            data={uploadedFiles?.filter(
+                              (n) => n.tipo === "IMAGEM"
+                            )}
+                            tipo={"IMAGEM"}
+                            protocolo={protocolo}
+                          />
+                        </CardBody>
+                      </Card>
+                    </Col>
+                    <Col md="3">
+                      <Card>
+                        <CardHeader>
+                          <Row className="align-items-center">
+                            <Col xs="2" className="col-auto">
+                              <div className="icon icon-shape">
+                                <i className="ni ni-tv-2" />
+                              </div>
+                            </Col>
+                            <Col xs="6">
+                              <h5 className="h3 mb-0">Videos</h5>
+                            </Col>
+                          </Row>
+                        </CardHeader>
 
-                          <CardBody></CardBody>
-                        </Card>
-                      </Col>
-                      <Col md="4">
-                        <Card>
-                          <CardHeader>
-                            <Row className="align-items-center">
-                              <Col xs="2" className="col-auto">
-                                <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                  <i className="ni ni-single-copy-04" />
-                                </div>
-                              </Col>
-                              <Col xs="6">
-                                <h5 className="h3 mb-0">Documentos</h5>
-                              </Col>
-                              <Col className="text-right" xs="4">
-                                <Button
-                                  className="btn-icon btn-neutral"
-                                  color="default"
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                  size="sm"
-                                >
-                                  <span className="btn-inner--icon">
-                                    <i class="ni ni-cloud-upload-96"></i>
-                                  </span>
-                                  <span className="btn-inner--text">
-                                    UPLOAD
-                                  </span>
-                                </Button>
-                              </Col>
-                            </Row>
-                          </CardHeader>
+                        <CardBody>
+                          <Dropzone
+                            accept={{
+                              "video/*": [".mp4"],
+                            }}
+                            data={uploadedFiles?.filter(
+                              (n) => n.tipo === "VIDEO"
+                            )}
+                            tipo={"VIDEO"}
+                            protocolo={protocolo}
+                          />
+                        </CardBody>
+                      </Card>
+                    </Col>
+                    <Col md="3">
+                      <Card>
+                        <CardHeader>
+                          <Row className="align-items-center">
+                            <Col xs="2" className="col-auto">
+                              <div className="icon icon-shape">
+                                <i className="ni ni-notification-70" />
+                              </div>
+                            </Col>
+                            <Col xs="6">
+                              <h5 className="h3 mb-0">Audios</h5>
+                            </Col>
+                          </Row>
+                        </CardHeader>
 
-                          <CardBody></CardBody>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </div>
+                        <CardBody>
+                          <Dropzone
+                            accept={{
+                              "application/pdf": [".pdf"],
+                              "application/msword": [".doc"],
+                            }}
+                            data={uploadedFiles?.filter(
+                              (n) => n.tipo === "AUDIO"
+                            )}
+                            tipo={"AUDIO"}
+                            protocolo={protocolo}
+                          />
+                        </CardBody>
+                      </Card>
+                    </Col>
+                    <Col md="3">
+                      <Card>
+                        <CardHeader>
+                          <Row className="align-items-center">
+                            <Col xs="2" className="col-auto">
+                              <div className="icon icon-shape">
+                                <i className="ni ni-single-copy-04" />
+                              </div>
+                            </Col>
+                            <Col xs="6">
+                              <h5 className="h3 mb-0">Documentos</h5>
+                            </Col>
+                          </Row>
+                        </CardHeader>
+
+                        <CardBody>
+                          <Dropzone
+                            accept={{
+                              "application/pdf": [".pdf"],
+                              "application/msword": [".doc"],
+                            }}
+                            data={uploadedFiles?.filter(
+                              (n) => n.tipo === "DOCUMENTO"
+                            )}
+                            tipo={"DOCUMENTO"}
+                            protocolo={protocolo}
+                          />
+                        </CardBody>
+                      </Card>
+                    </Col>
+                  </Row>
                 </TabPane>
                 <TabPane tabId="tabs3">
                   <Row>

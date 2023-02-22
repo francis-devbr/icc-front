@@ -5,25 +5,27 @@ import { v4 as uuidv4 } from "uuid";
 
 import FileUploadService from "app/api/ocorrencia/upload-files.service";
 import { filesize } from "filesize";
-import { useGetOcorrenciasDocumentosMutation } from "app/api/ocorrenciaInternaApiSlice";
-function Dropzone({ accept, open }) {
-  const [getOcorrenciasDocumentos] = useGetOcorrenciasDocumentosMutation();
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+import { useDeleteOcorrenciaDocumentoMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
 
+function Dropzone({ accept, open, tipo, data, protocolo }) {
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  console.log(data);
   const updateFile = useCallback((id, data) => {
     setUploadedFiles((state) =>
       state.map((file) => (file.id === id ? { ...file, ...data } : file))
     );
   }, []);
 
+  const [deleteOcorrenciaDocumento] = useDeleteOcorrenciaDocumentoMutation();
+
   const processUpload = useCallback(
-    (uploadedFile) => {
+    (uploadedFile, protocolo, tipo) => {
       FileUploadService.upload(
         {
           name: uploadedFile.name,
           readable_size: uploadedFile.readableSize,
-          tipo: "IMAGEM",
-          id_ocorrencia: 4,
+          tipo: tipo,
+          id_ocorrencia: protocolo,
         },
         uploadedFile.file,
         {
@@ -31,20 +33,11 @@ function Dropzone({ accept, open }) {
             let progress = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-
-            console.log(
-              `A imagem ${uploadedFile.name} está ${progress}% carregada... `
-            );
-
             updateFile(uploadedFile.id, { progress });
           },
         }
       )
         .then((response) => {
-          console.log(
-            `A imagem ${uploadedFile.name} já foi enviada para o servidor!`
-          );
-
           updateFile(uploadedFile.id, {
             uploaded: true,
             id: response.data.id,
@@ -65,7 +58,7 @@ function Dropzone({ accept, open }) {
     [updateFile]
   );
   const handleUpload = useCallback(
-    (files) => {
+    (files, protocolo, tipo) => {
       const newUploadedFiles = files.map((file) => ({
         file,
         id: uuidv4(),
@@ -79,39 +72,17 @@ function Dropzone({ accept, open }) {
       }));
 
       setUploadedFiles((state) => state.concat(newUploadedFiles));
-      newUploadedFiles.forEach(processUpload);
+      newUploadedFiles.forEach((u) => processUpload(u, protocolo, tipo));
     },
     [processUpload]
   );
-  const onDrop = useCallback(
-    (files) => {
-      handleUpload(files);
-    },
-    [handleUpload]
-  );
+  const onDrop = (files) => {
+    handleUpload(files, protocolo, tipo);
+  };
 
   useEffect(() => {
-    const get = async () => {
-      await getOcorrenciasDocumentos(4).then((response) => {
-        const postFormatted = response.data.map((post) => {
-          return {
-            ...post,
-            id: post.id,
-            preview: post.url,
-            readableSize: post.readable_size,
-            file: null,
-            error: false,
-            uploaded: true,
-          };
-        });
-
-        console.log(postFormatted);
-        setUploadedFiles(postFormatted);
-      });
-    };
-
-    get();
-  }, []);
+    setUploadedFiles(data);
+  }, [data]);
 
   const { getRootProps, getInputProps, isDragActive, isDragReject } =
     useDropzone({
@@ -123,7 +94,7 @@ function Dropzone({ accept, open }) {
     if (!isDragActive) {
       return (
         <div className="text-center">
-          <p className="dropzone-content">Arraste imagens aqui...</p>
+          <p className="dropzone-content">{`Arraste ${tipo?.toLowerCase()} aqui ou click...`}</p>
         </div>
       );
     }
@@ -131,21 +102,22 @@ function Dropzone({ accept, open }) {
     if (isDragReject) {
       return (
         <div className="text-center">
-          <p className="dropzone-content">Tipo de arquivo não suportado</p>
+          <p className="dropzone-content">`Tipo de arquivo não suportado`</p>
         </div>
       );
     }
 
     return (
       <div className="text-center">
-        <p className="dropzone-content">Solte as imagens aqui</p>
+        <p className="dropzone-content">{`Solte ${tipo?.toLowerCase()}s aqui...`}</p>
       </div>
     );
   }, [isDragActive, isDragReject]);
 
   const deleteFile = useCallback((id) => {
-    // api.delete(`posts/${id}`);
-    setUploadedFiles((state) => state.filter((file) => file.id !== id));
+    deleteOcorrenciaDocumento(id).then(
+      setUploadedFiles((state) => state.filter((file) => file.id !== id))
+    );
   }, []);
 
   useEffect(() => {
