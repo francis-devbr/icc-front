@@ -1,20 +1,27 @@
 import http from "http-common";
 
-const upload = (id,file, onUploadProgress) => {
+const upload = (data, file, onUploadProgress) => {
   let formData = new FormData();
 
   formData.append("file", file);
 
-  return http.post(`/ocorrencias/files/upload/${id}`, formData, {
+  formData.append(
+    "documento",
+    new Blob([JSON.stringify(data)], {
+      type: "application/json",
+    })
+  );
+
+  return http.post(`/ocorrencias/files/upload`, formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": undefined,
     },
+
     onUploadProgress,
   });
 };
 
 const getFiles = (id) => {
-  console.log("asssss")
   return http.get(`/ocorrencias/files/${id}`);
 };
 
