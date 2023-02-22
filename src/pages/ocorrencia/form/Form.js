@@ -614,8 +614,7 @@ const Forms = (props) => {
                         <CardBody>
                           <Dropzone
                             accept={{
-                              "application/pdf": [".pdf"],
-                              "application/msword": [".doc"],
+                              "audio/*": [".mp3"],
                             }}
                             data={uploadedFiles?.filter(
                               (n) => n.tipo === "AUDIO"
