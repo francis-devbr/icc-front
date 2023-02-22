@@ -184,20 +184,7 @@ function Dropzone({ accept, open, tipo, data, protocolo }) {
                   {uploadedFile.readableSize}
                 </p>
               </div>
-              <Col className=" col-auto">
-                {!!uploadedFile.url && (
-                  <>
-                    <Button
-                      size="sm"
-                      color="success"
-                      data-dz-remove
-                      onClick={(e) => downloadFile(uploadedFile)}
-                    >
-                      <i class="fa-solid fa-download"></i>
-                    </Button>
-                  </>
-                )}
-              </Col>
+
               <Col className=" col-auto">
                 {!!uploadedFile.url && (
                   <>
