@@ -29,6 +29,10 @@ const ocorrenciaInternaApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+
+    getOcorrenciasDocumentos: builder.mutation({
+      query: (id) => `/ocorrencias/files/v1/${id}`,
+    }),
   }),
 });
 
@@ -38,4 +42,5 @@ export const {
   useAddOcorrenciaInternaMutation,
   useUpdateOcorrenciaInternaMutation,
   useDeleteOcorrenciaInternaMutation,
+  useGetOcorrenciasDocumentosMutation,
 } = ocorrenciaInternaApiSlice;

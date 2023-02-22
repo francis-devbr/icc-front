@@ -1,11 +1,13 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 import { v4 as uuidv4 } from "uuid";
 
 import FileUploadService from "app/api/ocorrencia/upload-files.service";
 import { filesize } from "filesize";
+import { useGetOcorrenciasDocumentosMutation } from "app/api/ocorrenciaInternaApiSlice";
 function Dropzone({ accept, open }) {
+  const [getOcorrenciasDocumentos] = useGetOcorrenciasDocumentosMutation();
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const updateFile = useCallback((id, data) => {
@@ -13,10 +15,16 @@ function Dropzone({ accept, open }) {
       state.map((file) => (file.id === id ? { ...file, ...data } : file))
     );
   }, []);
+
   const processUpload = useCallback(
     (uploadedFile) => {
       FileUploadService.upload(
-        { nome: uploadedFile.name, tipo: "IMAGEM", id_ocorrencia: 1 },
+        {
+          name: uploadedFile.name,
+          readable_size: uploadedFile.readableSize,
+          tipo: "IMAGEM",
+          id_ocorrencia: 4,
+        },
         uploadedFile.file,
         {
           onUploadProgress: (progressEvent) => {
@@ -81,6 +89,30 @@ function Dropzone({ accept, open }) {
     },
     [handleUpload]
   );
+
+  useEffect(() => {
+    const get = async () => {
+      await getOcorrenciasDocumentos(4).then((response) => {
+        const postFormatted = response.data.map((post) => {
+          return {
+            ...post,
+            id: post.id,
+            preview: post.url,
+            readableSize: post.readable_size,
+            file: null,
+            error: false,
+            uploaded: true,
+          };
+        });
+
+        console.log(postFormatted);
+        setUploadedFiles(postFormatted);
+      });
+    };
+
+    get();
+  }, []);
+
   const { getRootProps, getInputProps, isDragActive, isDragReject } =
     useDropzone({
       accept,
@@ -115,6 +147,12 @@ function Dropzone({ accept, open }) {
     // api.delete(`posts/${id}`);
     setUploadedFiles((state) => state.filter((file) => file.id !== id));
   }, []);
+
+  useEffect(() => {
+    return () => {
+      uploadedFiles.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  });
   return (
     <div className="dropzone dropzone-multiple">
       <div {...getRootProps({ className: "dropzone " })}>
