@@ -21,13 +21,26 @@ const upload = (data, file, onUploadProgress) => {
   });
 };
 
-const getFiles = (id) => {
-  return http.get(`/ocorrencias/files/${id}`);
+const getFiles = ({id,filename}) => {
+  return http.get`/ocorrencias/files/v1/download/${id}/${filename}`;
 };
+
+const getFile = ({ id, filename }) => (
+  http.get(`/ocorrencias/files/v1/download/${id}/${filename}`, {
+    params: {
+      cacheBustTimestamp: Date.now(), // prevents IE cache problems on re-download
+    },
+    responseType: 'blob',
+    headers: {
+      Accept: 'application/octet-stream',
+    },
+  })
+);
 
 const FileUploadService = {
   upload,
   getFiles,
+  getFile,
 };
 
 export default FileUploadService;

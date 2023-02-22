@@ -6,8 +6,12 @@ import { v4 as uuidv4 } from "uuid";
 import FileUploadService from "app/api/ocorrencia/upload-files.service";
 import { filesize } from "filesize";
 import { useDeleteOcorrenciaDocumentoMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
+import { useGetDownloadOcorrenciasDocumentosMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
 
 function Dropzone({ accept, open, tipo, data, protocolo }) {
+  const [getDownloadOcorrenciasDocumentos] =
+    useGetDownloadOcorrenciasDocumentosMutation();
+
   const [uploadedFiles, setUploadedFiles] = useState([]);
   console.log(data);
   const updateFile = useCallback((id, data) => {
@@ -120,6 +124,25 @@ function Dropzone({ accept, open, tipo, data, protocolo }) {
     );
   }, []);
 
+  const downloadFile = useCallback((uploadedFile) => {
+    FileUploadService.getFile({
+      id: Number(uploadedFile.id),
+      filename: uploadedFile.name,
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response?.data]));
+      console.log(url);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        uploadedFile.name // File name with type
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    });
+  }, []);
+
   useEffect(() => {
     return () => {
       uploadedFiles.forEach((file) => URL.revokeObjectURL(file.preview));
@@ -141,12 +164,16 @@ function Dropzone({ accept, open, tipo, data, protocolo }) {
             <Row className=" align-items-center">
               <Col className=" col-auto">
                 <div className=" avatar">
-                  <img
-                    alt="..."
-                    className=" avatar-img rounded"
-                    data-dz-thumbnail
-                    src={uploadedFile.preview}
-                  />
+                  {tipo === "IMAGEM" && (
+                    <img
+                      alt="..."
+                      className=" avatar-img rounded"
+                      data-dz-thumbnail
+                      src={uploadedFile.preview}
+                    />
+                  )}
+
+                  {tipo === "VIDEO" && <i class="fa-solid fa-download"></i>}
                 </div>
               </Col>
               <div className=" col ml--3">
@@ -157,6 +184,20 @@ function Dropzone({ accept, open, tipo, data, protocolo }) {
                   {uploadedFile.readableSize}
                 </p>
               </div>
+              <Col className=" col-auto">
+                {!!uploadedFile.url && (
+                  <>
+                    <Button
+                      size="sm"
+                      color="success"
+                      data-dz-remove
+                      onClick={(e) => downloadFile(uploadedFile)}
+                    >
+                      <i class="fa-solid fa-download"></i>
+                    </Button>
+                  </>
+                )}
+              </Col>
               <Col className=" col-auto">
                 {!!uploadedFile.url && (
                   <>

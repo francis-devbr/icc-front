@@ -32,10 +32,16 @@ const ocorrenciaApiSlice = apiSlice.injectEndpoints({
 
     getOcorrenciasDocumentos: builder.mutation({
       query: (id) => {
-        console.log(id);
-
         return {
           url: `/ocorrencias/files/v1/${id}`,
+        };
+      },
+    }),
+
+    getDownloadOcorrenciasDocumentos: builder.mutation({
+      query: ({id,filename}) => {
+        return {
+          url: `/ocorrencias/files/v1/download/${id}/${filename}`,
         };
       },
     }),
@@ -57,4 +63,5 @@ export const {
   useDeleteOcorrenciaMutation,
   useDeleteOcorrenciaDocumentoMutation,
   useGetOcorrenciasDocumentosMutation,
+  useGetDownloadOcorrenciasDocumentosMutation
 } = ocorrenciaApiSlice;

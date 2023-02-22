@@ -32,6 +32,7 @@ import LoadingPage from "components/LoadingPage";
 import parametros from "app/data/params.json";
 import Dropzone from "./Dropzone";
 import { useGetOcorrenciasDocumentosMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
+import { useGetDownloadOcorrenciasDocumentosMutation } from "app/api/ocorrencia/ocorrenciaApiSlice";
 
 const Ocorrencia = () => {
   const params = useParams();
@@ -39,6 +40,7 @@ const Ocorrencia = () => {
 
   const { keycloak } = useKeycloak();
   const [getNaturezas] = useGetNaturezasMutation();
+
   const [getLojaBySigla] = useGetLojaBySiglaMutation();
   const [getOcorrencia, { isLoading }] = useGetOcorrenciaMutation();
   const [addOcorrencia] = useAddOcorrenciaMutation();
