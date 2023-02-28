@@ -29,13 +29,16 @@ const ocorrenciaInternaApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+
+  
   }),
 });
 
 export const {
-  useGetOcorrenciasInternasMutation,
+  useGetOcorrenciasInternaMutation,
   useGetOcorrenciaInternaMutation,
   useAddOcorrenciaInternaMutation,
   useUpdateOcorrenciaInternaMutation,
   useDeleteOcorrenciaInternaMutation,
+ 
 } = ocorrenciaInternaApiSlice;

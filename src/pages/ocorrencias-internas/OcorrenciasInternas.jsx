@@ -9,46 +9,40 @@ import {
   Col,
   Container,
   Row,
-  Modal, ModalHeader, ModalBody, ModalFooter
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 
+import ReactDOM from "react-dom";
+import { PDFViewer } from "@react-pdf/renderer";
 
-import ReactDOM from 'react-dom';
-import { PDFViewer } from '@react-pdf/renderer';
-
-
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
 import List from "./List";
 import { useState } from "react";
 
 const OcorrenciasInternas = () => {
-  
   const navigate = useNavigate();
 
   const styles = StyleSheet.create({
     page: {
-      flexDirection: 'row',
-      backgroundColor: '#E4E4E4',
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
       width: 100,
     },
     section: {
       margin: 10,
       padding: 10,
-      flexGrow: 1
-    }
+      flexGrow: 1,
+    },
   });
- 
 
+  const MyDocument = () => alert("teste");
 
-  const MyDocument = () => (
-   alert('teste')
-  );
-
-
-  const PDF = () => (
-    ReactDOM.render(<MyDocument />, document.getElementById('root'))
-  );
+  const PDF = () =>
+    ReactDOM.render(<MyDocument />, document.getElementById("root"));
 
   const [modal, setModal] = useState(false);
 
@@ -90,40 +84,42 @@ const OcorrenciasInternas = () => {
         </Row>
       </Container>
       <div>
-      
-        <Modal isOpen={modal} size={'lg'} toggle={toggle} >
-        <ModalHeader toggle={toggle}><i class="fas fa-file-pdf"></i> Relatório</ModalHeader>
-        <ModalBody>
-          <Container fluid>
-            <Row> 
-              <Col md={12}>
-                <PDFViewer className="w-100 pdf-size">
-                  <Document >
-                    <Page className="w-100" size="A4" style={styles.page}>
-                      <View style={styles.section}>
-                        <Text>Case Principal</Text>
-                      </View>
-                      <View style={styles.section}>
-                        <Text>COD LOJA</Text>
-                      </View>
-                      <View style={styles.section}>
-                        <Text>REGIÃO</Text>
-                      </View>
-                    </Page>
-                  </Document>
-                </PDFViewer>
-              </Col>
-            </Row>
-          </Container>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="success" onClick={toggle}><i class="fas fa-download"></i> Baixar Relatório</Button>{' '}
-          <Button color="danger" onClick={toggle}>  Cancel </Button>
-        </ModalFooter>
-       </Modal>
-     
-    </div>
-      
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalBody>
+            <Container fluid>
+              <Row>
+                <Col md={12}>
+                  <PDFViewer>
+                    <Document>
+                      <Page size="A4" style={styles.page}>
+                        <View style={styles.section}>
+                          <Text>Case Principal</Text>
+                        </View>
+                        <View style={styles.section}>
+                          <Text>COD LOJA</Text>
+                        </View>
+                        <View style={styles.section}>
+                          <Text>REGIÃO</Text>
+                        </View>
+                      </Page>
+                    </Document>
+                  </PDFViewer>
+                </Col>
+              </Row>
+            </Container>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="success" onClick={toggle}>
+              Baixar Relatório
+            </Button>{" "}
+            <Button color="danger" onClick={toggle}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </div>
     </>
   );
 };
