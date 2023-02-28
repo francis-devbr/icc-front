@@ -61,25 +61,6 @@ const OcorrenciasInternas = () => {
         <Row>
           <Col>
             <Card className="shadow" style={{ minHeight: "550px" }}>
-<<<<<<< HEAD
-              <CardHeader className="border-0">
-                {keycloak?.hasResourceRole("manager") && (
-                  <><Button
-                    color="success"
-                    className="btn mb-2 "
-                    onClick={() => navigate("/admin/ocorrencias-internas/new")}
-                  >
-                    <i className="ni ni-briefcase-24"></i> Adicionar Nova
-                    Ocorrência
-                  </Button><Button
-                    color="danger"
-                    className="btn mb-2 "
-                    onClick={toggle}
-                  >
-                      <i className="fas fa-file-pdf"></i> Gerar Relatório PDF
-                    </Button></>
-                )}
-=======
               <CardHeader>
                 <Row className="align-items-center">
                   <Col className="text-left" xs="12">
@@ -91,10 +72,15 @@ const OcorrenciasInternas = () => {
                       }
                     >
                       <i className="ni ni-folder-17"></i> Adicionar
+                    </Button><Button
+                      className="btn-dager"
+                      color="danger"
+                      onClick={toggle}
+                    >
+                      <i className="fas fa-file-pdf"></i> Gerar Relatório PDF
                     </Button>
                   </Col>
                 </Row>
->>>>>>> 529d4c9f4a4113e641e280737bd4391d8c474ca7
               </CardHeader>
               <CardBody>
                 <List />
@@ -105,44 +91,34 @@ const OcorrenciasInternas = () => {
       </Container>
       <div>
       
-       
-        
-      
-
-        <Modal isOpen={modal} toggle={toggle} >
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <Modal isOpen={modal} size={'lg'} toggle={toggle} >
+        <ModalHeader toggle={toggle}><i class="fas fa-file-pdf"></i> Relatório</ModalHeader>
         <ModalBody>
-      <Container fluid>
-        <Row> 
-          <Col md={12}>
-            <PDFViewer>
-              <Document>
-                <Page size="A4" style={styles.page}>
-                  <View style={styles.section}>
-                    <Text>Case Principal</Text>
-                  </View>
-                  <View style={styles.section}>
-                    <Text>COD LOJA</Text>
-                  </View>
-                  <View style={styles.section}>
-                    <Text>REGIÃO</Text>
-                  </View>
-                </Page>
-              </Document>
-            </PDFViewer>
-          </Col>
-        </Row>
-      </Container>
-      </ModalBody>
-          
-        
-      <ModalFooter>
-          <Button color="success" onClick={toggle}>
-            Baixar Relatório
-          </Button>{' '}
-          <Button color="danger" onClick={toggle}>
-            Cancel
-          </Button>
+          <Container fluid>
+            <Row> 
+              <Col md={12}>
+                <PDFViewer className="w-100 pdf-size">
+                  <Document >
+                    <Page className="w-100" size="A4" style={styles.page}>
+                      <View style={styles.section}>
+                        <Text>Case Principal</Text>
+                      </View>
+                      <View style={styles.section}>
+                        <Text>COD LOJA</Text>
+                      </View>
+                      <View style={styles.section}>
+                        <Text>REGIÃO</Text>
+                      </View>
+                    </Page>
+                  </Document>
+                </PDFViewer>
+              </Col>
+            </Row>
+          </Container>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={toggle}><i class="fas fa-download"></i> Baixar Relatório</Button>{' '}
+          <Button color="danger" onClick={toggle}>  Cancel </Button>
         </ModalFooter>
        </Modal>
      
